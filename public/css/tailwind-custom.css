@@ -1,0 +1,23 @@
+.text-custom {
+    color: #1B9AF5;
+}
+
+.bg-custom {
+    background-color: #1B9AF5;
+}
+
+.bg-background {
+    background-color: #0b1019;
+}
+
+.hover\:text-custom:hover {
+    color: #1B9AF5;
+}
+
+.rounded-button {
+    border-radius: 0.5rem;
+}
+
+.max-w-8xl {
+    max-width: 88rem;
+}

@@ -1,0 +1,18 @@
+{
+    "name": "5starjourney",
+    "version": "1.0.0",
+    "description": "A server-side rendered website for adventure and trekking experiences",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js",
+        "dev": "nodemon app.js"
+    },
+    "dependencies": {
+        "express": "^4.18.2",
+        "ejs": "^3.1.9",
+        "express-ejs-layouts": "^2.5.1"
+    },
+    "devDependencies": {
+        "nodemon": "^3.0.2"
+    }
+}
