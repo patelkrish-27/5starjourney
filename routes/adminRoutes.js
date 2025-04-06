@@ -27,13 +27,28 @@ router.get('/login', (req, res) => {
 router.post('/login', (req, res) => {
     const { email, password } = req.body;
     
+    // Check credentials
     if (email === ADMIN_CREDENTIALS.email && password === ADMIN_CREDENTIALS.password) {
+        // Set session variables
         req.session.isAdmin = true;
-        res.redirect('/admin/dashboard');
+        
+        // Force session save before redirecting
+        req.session.save((err) => {
+            if (err) {
+                console.error('Session save error:', err);
+                return res.render('admin/login', { 
+                    title: 'Admin Login | 5starjourney',
+                    error: 'Session error. Please try again.' 
+                });
+            }
+            
+            // Redirect to dashboard after successful save
+            res.redirect('/admin/dashboard');
+        });
     } else {
         res.render('admin/login', { 
             title: 'Admin Login | 5starjourney',
-            error: 'Invalid credentials' 
+            error: 'Invalid email or password' 
         });
     }
 });

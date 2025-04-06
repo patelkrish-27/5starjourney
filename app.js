@@ -13,12 +13,16 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Session configuration
+// Update session configuration for better Vercel compatibility
 app.use(session({
-    secret: 'your-secret-key',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: process.env.NODE_ENV === 'production' }
+  secret: 'your-secret-key', // Replace with a strong secret
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+  }
 }));
 
 // Body parser middleware
@@ -60,6 +64,32 @@ app.get('/', async (req, res) => {
 
 // Tour detail page route
 app.get('/tours/:id', async (req, res) => {
+   const faqs = [
+        {
+            question: 'What are the best seasons for international travel?',
+            answer: 'The best time varies by destination. Generally, shoulder seasons (spring/fall) offer good weather and fewer crowds. We can advise specific timing for your chosen destination.'
+        },
+        {
+            question: 'What travel documents do I need for international tours?',
+            answer: 'Requirements vary by destination. Generally, you\'ll need a valid passport with at least 6 months validity. Visa requirements differ by country and nationality.'
+        },
+        {
+            question: 'What\'s included in your tour packages?',
+            answer: 'Our packages typically include accommodation, transportation, guided tours, some meals, and entrance fees to attractions. Specific inclusions are listed with each tour.'
+        },
+        {
+            question: 'How physically demanding are the tours?',
+            answer: 'Activity levels vary by tour. Most are suitable for average fitness levels. Each tour description includes a difficulty rating and physical requirements.'
+        },
+        {
+            question: 'What types of accommodation do you offer?',
+            answer: 'We partner with carefully vetted properties ranging from luxury resorts to boutique hotels. All accommodations meet our high standards for comfort, cleanliness, and service.'
+        },
+        {
+            question: 'Is it possible to customize tours?',
+            answer: 'Yes, we specialize in creating customized experiences. Our team can modify existing tours or create completely personalized itineraries to match your preferences.'
+        }
+    ]
   try {
     const id = req.params.id;
     const tour = await tourService.getTourById(id);
@@ -67,7 +97,7 @@ app.get('/tours/:id', async (req, res) => {
     if (!tour) {
       return res.status(404).render('error', { message: 'Tour not found' });
     }
-    res.render('tourpage', { tour });
+    res.render('tourpage', { tour,faqs });
   } catch (error) {
     console.error('Error fetching tour details:', error);
     res.status(500).render('error', { message: 'Failed to load tour details' });

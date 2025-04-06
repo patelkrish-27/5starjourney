@@ -1,26 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard | 5starjourney</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com/3.4.5?plugins=forms@0.5.7,typography@0.5.13"></script>
-    <script src="https://ai-public.creatie.ai/gen_page/tailwind-config.min.js" data-color="#ff0066" data-border-radius="medium"></script>
+    <script src="https://ai-public.creatie.ai/gen_page/tailwind-config.min.js" data-color="#ff0066"
+        data-border-radius="medium"></script>
 </head>
+
 <body class="bg-gray-100 dark:bg-gray-900">
     <!-- Sidebar -->
-    <aside class="fixed left-0 top-0 h-screen w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700">
+    <aside
+        class="fixed left-0 top-0 h-screen w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700">
         <div class="p-6">
             <h1 class="text-2xl font-bold dark:text-white">
                 <span class="text-[#ff0066]">5</span>STARJOURNEY
             </h1>
             <p class="text-sm text-gray-600 dark:text-gray-400">Admin Panel</p>
         </div>
-        
+
         <nav class="mt-6">
-            <a href="/admin/dashboard" class="flex items-center px-6 py-3 text-gray-700 dark:text-white bg-gray-100 dark:bg-gray-700 border-l-4 border-[#ff0066]">
+            <a href="/admin/dashboard"
+                class="flex items-center px-6 py-3 text-gray-700 dark:text-white bg-gray-100 dark:bg-gray-700 border-l-4 border-[#ff0066]">
                 <i class="fas fa-globe w-5"></i>
                 <span class="mx-4">Tour Management</span>
             </a>
@@ -35,13 +40,15 @@
                 <h2 class="text-2xl font-bold dark:text-white">Tour Management</h2>
                 <p class="text-gray-600 dark:text-gray-400">Manage your tours and packages</p>
             </div>
-            
+
             <div class="flex items-center space-x-4">
-                <button id="addTourBtn" class="bg-[#ff0066] text-white px-4 py-2 rounded-lg hover:bg-[#ff0066]/90 transition-colors duration-200">
+                <button id="addTourBtn"
+                    class="bg-[#ff0066] text-white px-4 py-2 rounded-lg hover:bg-[#ff0066]/90 transition-colors duration-200">
                     <i class="fas fa-plus mr-2"></i>Add New Tour
                 </button>
                 <form action="/admin/logout" method="POST" class="inline">
-                    <button type="submit" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors duration-200">
+                    <button type="submit"
+                        class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors duration-200">
                         Logout
                     </button>
                 </form>
@@ -55,7 +62,9 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-gray-500 dark:text-gray-400">Total Tours</p>
-                        <h3 class="text-2xl font-bold dark:text-white"><%= stats.totalTours %></h3>
+                        <h3 class="text-2xl font-bold dark:text-white">
+                            <%= stats.totalTours %>
+                        </h3>
                     </div>
                     <div class="bg-blue-100 dark:bg-blue-900 p-3 rounded-lg">
                         <i class="fas fa-globe text-blue-500 dark:text-blue-300"></i>
@@ -68,7 +77,9 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-gray-500 dark:text-gray-400">International Tours</p>
-                        <h3 class="text-2xl font-bold dark:text-white"><%= stats.internationalTours %></h3>
+                        <h3 class="text-2xl font-bold dark:text-white">
+                            <%= stats.internationalTours %>
+                        </h3>
                     </div>
                     <div class="bg-green-100 dark:bg-green-900 p-3 rounded-lg">
                         <i class="fas fa-plane text-green-500 dark:text-green-300"></i>
@@ -81,7 +92,9 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-gray-500 dark:text-gray-400">Domestic Tours</p>
-                        <h3 class="text-2xl font-bold dark:text-white"><%= stats.domesticTours %></h3>
+                        <h3 class="text-2xl font-bold dark:text-white">
+                            <%= stats.domesticTours %>
+                        </h3>
                     </div>
                     <div class="bg-yellow-100 dark:bg-yellow-900 p-3 rounded-lg">
                         <i class="fas fa-map-marker-alt text-yellow-500 dark:text-yellow-300"></i>
@@ -99,37 +112,52 @@
                 <table class="w-full">
                     <thead class="bg-gray-50 dark:bg-gray-700">
                         <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Tour Name</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Duration</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">International</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Actions</th>
+                            <th
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Tour Name</th>
+                            <th
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Duration</th>
+                            <th
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                International</th>
+                            <th
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Actions</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-                        <% tours.forEach(tour => { %>
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-medium text-gray-900 dark:text-white"><%= tour.title %></div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-500 dark:text-gray-400"><%= tour.duration %> Days</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                        <% tours.forEach(tour=> { %>
+                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm font-medium text-gray-900 dark:text-white">
+                                        <%= tour.title %>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-500 dark:text-gray-400">
+                                        <%= tour.duration %> Days
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span
+                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
                                     <%= tour.category === 'International' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' %>">
-                                    <%= tour.category %>
-                                </span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                <button class="text-blue-600 hover:text-blue-900 mr-3" onclick="editTour('<%= tour.id %>')">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="text-red-600 hover:text-red-900" onclick="deleteTour('<%= tour.id %>')">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <% }); %>
+                                        <%= tour.category %>
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <button class="text-blue-600 hover:text-blue-900 mr-3"
+                                        onclick="editTour('<%= tour.id %>')">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="text-red-600 hover:text-red-900"
+                                        onclick="deleteTour('<%= tour.id %>')">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <% }); %>
                     </tbody>
                 </table>
             </div>
@@ -143,41 +171,70 @@
             <form id="tourForm" class="space-y-4 max-h-[80vh] overflow-y-auto px-2">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tour Name</label>
-                    <input type="text" name="name" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <input type="text" name="name" required
+                        class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                 </div>
-                
+
                 <!-- Tour Images -->
                 <div class="space-y-2">
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tour Images (URLs)</label>
-                    <input type="url" name="imageUrl1" placeholder="Image URL 1" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white mb-2">
-                    <input type="url" name="imageUrl2" placeholder="Image URL 2" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white mb-2">
-                    <input type="url" name="imageUrl3" placeholder="Image URL 3" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tour Images
+                        (URLs)</label>
+                    <input type="url" name="imageUrl1" placeholder="Image URL 1" required
+                        class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white mb-2">
+                    <input type="url" name="imageUrl2" placeholder="Image URL 2" required
+                        class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white mb-2">
+                    <input type="url" name="imageUrl3" placeholder="Image URL 3" required
+                        class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                 </div>
 
                 <!-- Tour Details -->
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Duration (Days)</label>
-                        <input type="number" name="duration" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Duration
+                            (Days)</label>
+                        <input type="number" name="duration" required
+                            class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Group Size</label>
-                        <input type="number" name="groupSize" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Group
+                            Size</label>
+                        <input type="number" name="groupSize" required
+                            class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Difficulty Level</label>
-                    <select name="difficulty" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Difficulty
+                        Level</label>
+                    <select name="difficulty" required
+                        class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                         <option value="Easy">Easy</option>
                         <option value="Moderate">Moderate</option>
                         <option value="Challenging">Challenging</option>
                     </select>
                 </div>
+                <!-- Add Starting Point field -->
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Starting
+                        Location</label>
+                    <input type="text" name="startingPoint"
+                        class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                        placeholder="e.g., Delhi, Mumbai, etc." required>
+                </div>
 
+                <!-- Add Download Link field -->
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Brochure Download
+                        Link</label>
+                    <input type="url" name="downloadLink"
+                        class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                        placeholder="https://example.com/brochure.pdf">
+                    <p class="text-xs text-gray-500 mt-1">Enter a URL to the downloadable brochure (PDF recommended)</p>
+                </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tour Category</label>
-                    <select name="category" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <select name="category" required
+                        class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                         <option value="International">International</option>
                         <option value="Domestic">Domestic</option>
                         <option value="Highlight">Highlight</option>
@@ -186,13 +243,17 @@
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description</label>
-                    <textarea name="description" rows="4" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white"></textarea>
+                    <textarea name="description" rows="4" required
+                        class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white"></textarea>
                 </div>
 
                 <!-- Highlights -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Highlights (one per line)</label>
-                    <textarea name="highlights" rows="4" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="Enter each highlight on a new line"></textarea>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Highlights (one per
+                        line)</label>
+                    <textarea name="highlights" rows="4" required
+                        class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                        placeholder="Enter each highlight on a new line"></textarea>
                 </div>
 
                 <!-- Itinerary -->
@@ -202,30 +263,42 @@
                         <div class="flex justify-between items-center mb-2">
                             <h4 class="font-medium">Day 1</h4>
                         </div>
-                        <input type="text" name="itinerary[0][title]" placeholder="Day Title" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white mb-2">
-                        <textarea name="itinerary[0][description]" placeholder="Day Description" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white" rows="2"></textarea>
+                        <input type="text" name="itinerary[0][title]" placeholder="Day Title" required
+                            class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white mb-2">
+                        <textarea name="itinerary[0][description]" placeholder="Day Description" required
+                            class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                            rows="2"></textarea>
                     </div>
                 </div>
-                <button type="button" onclick="addItineraryDay()" class="w-full px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600">
+                <button type="button" onclick="addItineraryDay()"
+                    class="w-full px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600">
                     <i class="fas fa-plus mr-2"></i>Add Another Day
                 </button>
 
                 <!-- Popular Attractions -->
                 <div id="attractionsContainer" class="space-y-4">
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Popular Attractions</label>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Popular
+                        Attractions</label>
                     <div class="attraction border border-gray-200 dark:border-gray-600 p-4 rounded-lg">
-                        <input type="text" name="attractions[0][name]" placeholder="Attraction Name" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white mb-2">
-                        <input type="url" name="attractions[0][imageUrl]" placeholder="Attraction Image URL" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white mb-2">
-                        <textarea name="attractions[0][description]" placeholder="Attraction Description" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white" rows="2"></textarea>
+                        <input type="text" name="attractions[0][name]" placeholder="Attraction Name" required
+                            class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white mb-2">
+                        <input type="url" name="attractions[0][imageUrl]" placeholder="Attraction Image URL" required
+                            class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white mb-2">
+                        <textarea name="attractions[0][description]" placeholder="Attraction Description" required
+                            class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                            rows="2"></textarea>
                     </div>
                 </div>
-                <button type="button" onclick="addAttraction()" class="w-full px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600">
+                <button type="button" onclick="addAttraction()"
+                    class="w-full px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600">
                     <i class="fas fa-plus mr-2"></i>Add Another Attraction
                 </button>
 
                 <div class="flex justify-end space-x-3 pt-4">
-                    <button type="button" onclick="closeModal()" class="px-4 py-2 text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300">Cancel</button>
-                    <button type="submit" class="px-4 py-2 text-white bg-[#ff0066] rounded-lg hover:bg-[#ff0066]/90">Save Tour</button>
+                    <button type="button" onclick="closeModal()"
+                        class="px-4 py-2 text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300">Cancel</button>
+                    <button type="submit"
+                        class="px-4 py-2 text-white bg-[#ff0066] rounded-lg hover:bg-[#ff0066]/90">Save Tour</button>
                 </div>
             </form>
         </div>
@@ -239,13 +312,13 @@
         const tourForm = document.getElementById('tourForm');
         let itineraryCount = 1;
         let attractionCount = 1;
-    
+
         // Modal functions
         function closeModal() {
             modal.classList.add('hidden');
             modal.classList.remove('flex');
         }
-    
+
         function addItineraryDay() {
             const container = document.getElementById('itineraryContainer');
             const dayDiv = document.createElement('div');
@@ -263,7 +336,7 @@
             container.appendChild(dayDiv);
             itineraryCount++;
         }
-    
+
         function addAttraction() {
             const container = document.getElementById('attractionsContainer');
             const attractionDiv = document.createElement('div');
@@ -282,7 +355,7 @@
             container.appendChild(attractionDiv);
             attractionCount++;
         }
-    
+
         function resetItineraryAndAttractions() {
             document.getElementById('itineraryContainer').innerHTML = `
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Itinerary</label>
@@ -294,7 +367,7 @@
                     <textarea name="itinerary[0][description]" placeholder="Day Description" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white" rows="2"></textarea>
                 </div>
             `;
-            
+
             document.getElementById('attractionsContainer').innerHTML = `
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Popular Attractions</label>
                 <div class="attraction border border-gray-200 dark:border-gray-600 p-4 rounded-lg">
@@ -303,47 +376,47 @@
                     <textarea name="attractions[0][description]" placeholder="Attraction Description" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white" rows="2"></textarea>
                 </div>
             `;
-            
+
             itineraryCount = 1;
             attractionCount = 1;
         }
-    
+
         // Tour operations
         async function editTour(tourId) {
             modal.classList.remove('hidden');
             modal.classList.add('flex');
-            
+
             try {
                 const response = await fetch(`/admin/tours/${tourId}`);
                 if (!response.ok) throw new Error('Failed to fetch tour');
-                
+
                 const tour = await response.json();
-                
+
                 // Fill form with tour data
                 tourForm.reset();
                 resetItineraryAndAttractions();
-                
+
                 tourForm.elements.name.value = tour.title;
-                
+
                 // Fill images
                 if (tour.images && tour.images.length > 0) {
                     for (let i = 0; i < Math.min(tour.images.length, 3); i++) {
-                        tourForm.elements[`imageUrl${i+1}`].value = tour.images[i];
+                        tourForm.elements[`imageUrl${i + 1}`].value = tour.images[i];
                     }
                 }
-                
+
                 // Fill other fields
                 tourForm.elements.duration.value = parseInt(tour.duration);
                 tourForm.elements.groupSize.value = parseInt(tour.groupSize);
                 tourForm.elements.difficulty.value = tour.difficulty;
                 tourForm.elements.description.value = tour.description;
                 tourForm.elements.highlights.value = tour.highlights.join('\n');
-                
+
                 // Fill itinerary
                 if (tour.itinerary) {
                     const itineraryContainer = document.getElementById('itineraryContainer');
                     itineraryContainer.innerHTML = '<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Itinerary</label>';
-                    
+
                     let dayIndex = 0;
                     for (const day in tour.itinerary) {
                         const dayData = tour.itinerary[day];
@@ -364,12 +437,12 @@
                     }
                     itineraryCount = dayIndex;
                 }
-                
+
                 // Fill attractions
                 if (tour.attractions && tour.attractions.length > 0) {
                     const attractionsContainer = document.getElementById('attractionsContainer');
                     attractionsContainer.innerHTML = '<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Popular Attractions</label>';
-                    
+
                     tour.attractions.forEach((attraction, index) => {
                         const attractionDiv = document.createElement('div');
                         attractionDiv.className = 'attraction border border-gray-200 dark:border-gray-600 p-4 rounded-lg';
@@ -388,26 +461,26 @@
                     });
                     attractionCount = tour.attractions.length;
                 }
-                
+
                 // Set form mode to edit
                 tourForm.dataset.mode = 'edit';
                 tourForm.dataset.tourId = tourId;
-                
+
             } catch (error) {
                 console.error('Error fetching tour:', error);
                 alert('Failed to load tour data');
             }
         }
-    
+
         async function deleteTour(tourId) {
             if (confirm('Are you sure you want to delete this tour?')) {
                 try {
                     const response = await fetch(`/admin/tours/${tourId}`, {
                         method: 'DELETE'
                     });
-                    
+
                     if (!response.ok) throw new Error('Failed to delete tour');
-                    
+
                     // Refresh the page to show updated data
                     window.location.reload();
                 } catch (error) {
@@ -416,7 +489,7 @@
                 }
             }
         }
-    
+
         // Form submission
         tourForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -438,16 +511,16 @@
                 itinerary: {},
                 attractions: []
             };
-    
+
             // Collect itinerary data
             const itineraryDays = document.querySelectorAll('.itinerary-day');
             itineraryDays.forEach((day, index) => {
-                tourData.itinerary[`day${index+1}`] = {
+                tourData.itinerary[`day${index + 1}`] = {
                     title: formData.get(`itinerary[${index}][title]`),
                     description: formData.get(`itinerary[${index}][description]`)
                 };
             });
-    
+
             // Collect attractions data
             const attractions = document.querySelectorAll('.attraction');
             attractions.forEach((attraction, index) => {
@@ -457,13 +530,13 @@
                     description: formData.get(`attractions[${index}][description]`)
                 });
             });
-            
+
             try {
-                const url = tourForm.dataset.mode === 'edit' 
-                    ? `/admin/tours/${tourForm.dataset.tourId}` 
+                const url = tourForm.dataset.mode === 'edit'
+                    ? `/admin/tours/${tourForm.dataset.tourId}`
                     : '/admin/tours';
                 const method = tourForm.dataset.mode === 'edit' ? 'PUT' : 'POST';
-                
+
                 const response = await fetch(url, {
                     method: method,
                     headers: {
@@ -471,9 +544,9 @@
                     },
                     body: JSON.stringify(tourData)
                 });
-    
+
                 if (!response.ok) throw new Error('ah! Failed to save tour');
-    
+
                 // Refresh the page to show updated data
                 window.location.reload();
             } catch (error) {
@@ -481,7 +554,7 @@
                 alert('Failed to save tour. Please try again.');
             }
         });
-    
+
         // Initialize event listeners
         addTourBtn.addEventListener('click', () => {
             modal.classList.remove('hidden');

@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= title %> | 5starjourney</title>
+    <title>
+        <%= title %> | 5starjourney
+    </title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
         rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
@@ -13,84 +15,87 @@
         src="https://cdn.tailwindcss.com/3.4.5?plugins=forms@0.5.7,typography@0.5.13,aspect-ratio@0.4.2,container-queries@0.1.1"></script>
     <script src="https://ai-public.creatie.ai/gen_page/tailwind-config.min.js" data-color="#EB1F55"
         data-border-radius="medium"></script>
-        <style>
-            /* Add this to your existing styles */
-            html {
-                scroll-behavior: smooth;
+    <style>
+        /* Add this to your existing styles */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        section {
+            scroll-margin-top: 70px;
+        }
+
+        /* Mobile menu styles */
+        #mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            /* Start off-screen */
+            width: 300px;
+            height: 100vh;
+            background-color: #0b1019;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            transition: right 0.3s ease-in-out;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            overflow-y: auto;
+        }
+
+        #mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .mobile-menu-content {
+            padding-top: 60px;
+            display: flex;
+            flex-direction: column;
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+
+        .mobile-menu-content a {
+            padding: 15px 0;
+            font-size: 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+            display: none;
+        }
+
+        .mobile-menu-overlay.active {
+            display: block;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-text h1 {
+                font-size: 2.5rem;
             }
-            section {
-                scroll-margin-top: 70px;
+
+            .hero-text p {
+                font-size: 1rem;
             }
-            
-            /* Mobile menu styles */
-            #mobile-menu {
-                position: fixed;
-                top: 0;
-                right: -300px; /* Start off-screen */
-                width: 300px;
-                height: 100vh;
-                background-color: #0b1019;
-                backdrop-filter: blur(10px);
-                z-index: 100;
-                transition: right 0.3s ease-in-out;
-                border-left: 1px solid rgba(255, 255, 255, 0.1);
-                overflow-y: auto;
-            }
-            
-            #mobile-menu.active {
-                right: 0;
-            }
-            
-            .mobile-menu-close {
-                position: absolute;
-                top: 20px;
-                right: 20px;
-                color: white;
-                background: none;
-                border: none;
-                font-size: 24px;
-                cursor: pointer;
-            }
-            
-            .mobile-menu-content {
-                padding-top: 60px;
-                display: flex;
-                flex-direction: column;
-                padding-left: 30px;
-                padding-right: 30px;
-            }
-            
-            .mobile-menu-content a {
-                padding: 15px 0;
-                font-size: 18px;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            }
-            
-            .mobile-menu-overlay {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.5);
-                z-index: 99;
-                display: none;
-            }
-            
-            .mobile-menu-overlay.active {
-                display: block;
-            }
-            
-            /* Responsive adjustments */
-            @media (max-width: 768px) {
-                .hero-text h1 {
-                    font-size: 2.5rem;
-                }
-                .hero-text p {
-                    font-size: 1rem;
-                }
-            }
-        </style>
+        }
+    </style>
 </head>
 
 <body class="font-sans dark:bg-gray-900">
@@ -99,29 +104,36 @@
             <div class="mx-4">
                 <div class="backdrop-blur-md bg-black/20 border border-white/10 rounded-2xl shadow-lg">
                     <div class="flex items-center justify-between container mx-auto px-6 py-4">
-                       
+
                         <a href="/" class="text-3xl font-bold text-white tracking-wider">
                             <span class="text-[#ff0066]">5</span>STARJOURNEY
                         </a>
                         <div class="hidden md:flex items-center space-x-8">
-                            <a href="/" class="text-white hover:text-[#ff0066] transition-colors duration-300 text-sm">HOME</a>
-                            <a href="/#Services" class="text-white hover:text-[#ff0066] transition-colors duration-300 text-sm">SERVICES</a>
-                            <a href="/#Domestic" class="text-white hover:text-[#ff0066] transition-colors duration-300 text-sm">DOMESTIC</a>
-                            <a href="/#International" class="text-white hover:text-[#ff0066] transition-colors duration-300 text-sm">INTERNATIONAL</a>
-                            <a href="#Footer" class="text-white hover:text-[#ff0066] transition-colors duration-300 text-sm">CONTACT</a>
-                            <a href="/admin/login" class="bg-[#ff0066] text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-[#ff0066]/90 transition-all duration-300">Admin</a>
+                            <a href="/"
+                                class="text-white hover:text-[#ff0066] transition-colors duration-300 text-sm">HOME</a>
+                            <a href="/#Services"
+                                class="text-white hover:text-[#ff0066] transition-colors duration-300 text-sm">SERVICES</a>
+                            <a href="/#Domestic"
+                                class="text-white hover:text-[#ff0066] transition-colors duration-300 text-sm">DOMESTIC</a>
+                            <a href="/#International"
+                                class="text-white hover:text-[#ff0066] transition-colors duration-300 text-sm">INTERNATIONAL</a>
+                            <a href="#Footer"
+                                class="text-white hover:text-[#ff0066] transition-colors duration-300 text-sm">CONTACT</a>
+                            <a href="/admin/login"
+                                class="bg-[#ff0066] text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-[#ff0066]/90 transition-all duration-300">Admin</a>
                         </div>
-                        <button id="mobile-menu-button" class="md:hidden text-white hover:text-[#ff0066] transition-colors duration-300">
+                        <button id="mobile-menu-button"
+                            class="md:hidden text-white hover:text-[#ff0066] transition-colors duration-300">
                             <i class="fas fa-bars text-2xl"></i>
                         </button>
                     </div>
                 </div>
             </div>
         </nav>
-        
+
         <!-- Mobile menu overlay -->
         <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
-        
+
         <!-- Mobile menu -->
         <div id="mobile-menu">
             <button id="mobile-menu-close" class="mobile-menu-close">
@@ -131,21 +143,25 @@
                 <a href="#" class="text-white hover:text-[#ff0066] transition-colors duration-300">HOME</a>
                 <a href="#Services" class="text-white hover:text-[#ff0066] transition-colors duration-300">SERVICES</a>
                 <a href="#Domestic" class="text-white hover:text-[#ff0066] transition-colors duration-300">DOMESTIC</a>
-                <a href="#International" class="text-white hover:text-[#ff0066] transition-colors duration-300">INTERNATIONAL</a>
+                <a href="#International"
+                    class="text-white hover:text-[#ff0066] transition-colors duration-300">INTERNATIONAL</a>
                 <a href="#Footer" class="text-white hover:text-[#ff0066] transition-colors duration-300">CONTACT</a>
-                <button class="bg-[#ff0066] text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-[#ff0066]/90 transition-all duration-300 mt-6">Book Now</button>
+                <a href="https://wa.me/918238773780"
+                    class="bg-[#ff0066] text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-[#ff0066]/90 transition-all duration-300 mt-6">Book
+                    Now</a>
             </div>
         </div>
-        
+
         <!-- Rest of the header content -->
         <div class="absolute inset-0 bg-gradient-to-b from-black/60 to-black/30 z-10"></div>
-        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1440&h=600&q=80" 
-             class="absolute inset-0 w-full h-full object-cover" 
-             alt="Hero background"/>
+        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1440&h=600&q=80"
+            class="absolute inset-0 w-full h-full object-cover" alt="Hero background" />
         <div class="relative z-20 max-w-8xl mx-auto px-6 pt-32 hero-text">
-            <h1 class="text-6xl font-bold text-white mb-6">Your Journey, <br/>Our Passion</h1>
-            <p class="text-xl text-white/90 mb-8 max-w-2xl">Explore the world with 5starjourney—where every trip is tailored, every destination unforgettable, and every moment filled with wonder.</p>
-            <a href="https://wa.me/918238773780" class="!rounded-button bg-custom text-white px-8 py-3 text-lg">Book Now</a>            
+            <h1 class="text-6xl font-bold text-white mb-6">Your Journey, <br />Our Passion</h1>
+            <p class="text-xl text-white/90 mb-8 max-w-2xl">Explore the world with 5starjourney—where every trip is
+                tailored, every destination unforgettable, and every moment filled with wonder.</p>
+            <a href="https://wa.me/918238773780" class="!rounded-button bg-custom text-white px-8 py-3 text-lg">Book
+                Now</a>
         </div>
     </header>
     <main class="max-w-8xl mx-auto px-6 py-16">
@@ -156,63 +172,85 @@
                     <div class="relative w-full h-96 mb-8">
                         <div class="carousel relative overflow-hidden rounded-xl">
                             <div class="flex transition-transform duration-500">
-                                <% if (tour.images && tour.images.length > 0) { %>
-                                    <% tour.images.forEach((image, index) => { %>
-                                        <img src="<%= image %>" class="w-full h-96 object-cover flex-shrink-0" alt="<%= tour.title %> View <%= index + 1 %>" />
-                                    <% }); %>
-                                <% } else { %>
-                                    <img src="/assets/images/tours/default-tour.jpg" class="w-full h-96 object-cover flex-shrink-0" alt="Default Tour Image" />
-                                <% } %>
+                                <% if (tour.images && tour.images.length> 0) { %>
+                                    <% tour.images.forEach((image, index)=> { %>
+                                        <img src="<%= image %>" class="w-full h-96 object-cover flex-shrink-0"
+                                            alt="<%= tour.title %> View <%= index + 1 %>" />
+                                        <% }); %>
+                                            <% } else { %>
+                                                <img src="/assets/images/tours/default-tour.jpg"
+                                                    class="w-full h-96 object-cover flex-shrink-0"
+                                                    alt="Default Tour Image" />
+                                                <% } %>
                             </div>
-                            <button class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg">
+                            <button
+                                class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg">
                                 <i class="fas fa-chevron-left"></i>
                             </button>
-                            <button class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg">
+                            <button
+                                class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg">
                                 <i class="fas fa-chevron-right"></i>
                             </button>
                             <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
-                                <% if (tour.images && tour.images.length > 0) { %>
-                                    <% tour.images.forEach((_, index) => { %>
-                                        <button class="w-2 h-2 rounded-full bg-white/60 hover:bg-white <%= index === 0 ? 'bg-white' : '' %>"></button>
-                                    <% }); %>
-                                <% } else { %>
-                                    <button class="w-2 h-2 rounded-full bg-white"></button>
-                                <% } %>
+                                <% if (tour.images && tour.images.length> 0) { %>
+                                    <% tour.images.forEach((_, index)=> { %>
+                                        <button
+                                            class="w-2 h-2 rounded-full bg-white/60 hover:bg-white <%= index === 0 ? 'bg-white' : '' %>"></button>
+                                        <% }); %>
+                                            <% } else { %>
+                                                <button class="w-2 h-2 rounded-full bg-white"></button>
+                                                <% } %>
                             </div>
                         </div>
                     </div>
-                    <h1 class="text-4xl font-bold mb-4 dark:text-white"><%= tour.title %></h1>
+                    <h1 class="text-4xl font-bold mb-4 dark:text-white">
+                        <%= tour.title %>
+                    </h1>
                     <div class="flex items-center space-x-4 mb-6">
-                        <span class="bg-custom/10 text-custom px-3 py-1 rounded-full"><%= tour.duration %></span>
-                        <span class="bg-custom/10 text-custom px-3 py-1 rounded-full"><%= tour.category %></span>
-                        <span class="bg-custom/10 text-custom px-3 py-1 rounded-full"><%= tour.difficulty %></span>
+                        <span class="bg-custom/10 text-custom px-3 py-1 rounded-full">
+                            <%= tour.duration %>
+                        </span>
+                        <span class="bg-custom/10 text-custom px-3 py-1 rounded-full">
+                            <%= tour.category %>
+                        </span>
+                        <span class="bg-custom/10 text-custom px-3 py-1 rounded-full">
+                            <%= tour.difficulty %>
+                        </span>
                     </div>
                     <div class="prose dark:prose-invert max-w-none mb-8">
                         <h2 class="text-2xl font-semibold mb-4">Tour Overview</h2>
-                        <p class="text-gray-600 dark:text-gray-400"><%= tour.description %></p>
-                        
+                        <p class="text-gray-600 dark:text-gray-400">
+                            <%= tour.description %>
+                        </p>
+
                         <!-- 2. Highlights -->
-                        <% if (tour.highlights && tour.highlights.length > 0) { %>
+                        <% if (tour.highlights && tour.highlights.length> 0) { %>
                             <h2 class="text-2xl font-semibold mb-4 mt-8">Highlights</h2>
                             <ul class="list-disc pl-6 text-gray-600 dark:text-gray-400">
-                                <% tour.highlights.forEach(highlight => { %>
-                                    <li><%= highlight %></li>
-                                <% }); %>
+                                <% tour.highlights.forEach(highlight=> { %>
+                                    <li>
+                                        <%= highlight %>
+                                    </li>
+                                    <% }); %>
                             </ul>
-                        <% } %>
-                        
-                        <!-- 3. Itinerary -->
-                        <% if (tour.itinerary) { %>
-                            <h2 class="text-2xl font-semibold mb-4 mt-8">Itinerary</h2>
-                            <div class="space-y-4">
-                                <% Object.keys(tour.itinerary).forEach(day => { %>
-                                    <div class="border-l-4 border-custom pl-4">
-                                        <h3 class="font-semibold"><%= tour.itinerary[day].title || `Day ${day}` %></h3>
-                                        <p class="text-gray-600 dark:text-gray-400"><%= tour.itinerary[day].description %></p>
+                            <% } %>
+
+                                <!-- 3. Itinerary -->
+                                <% if (tour.itinerary) { %>
+                                    <h2 class="text-2xl font-semibold mb-4 mt-8">Itinerary</h2>
+                                    <div class="space-y-4">
+                                        <% Object.keys(tour.itinerary).forEach(day=> { %>
+                                            <div class="border-l-4 border-custom pl-4">
+                                                <h3 class="font-semibold">
+                                                    <%= tour.itinerary[day].title || `Day ${day}` %>
+                                                </h3>
+                                                <p class="text-gray-600 dark:text-gray-400">
+                                                    <%= tour.itinerary[day].description %>
+                                                </p>
+                                            </div>
+                                            <% }); %>
                                     </div>
-                                <% }); %>
-                            </div>
-                        <% } %>
+                                    <% } %>
                     </div>
                 </div>
                 <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg h-fit sticky top-8">
@@ -220,115 +258,152 @@
                     <div class="space-y-4 mb-6">
                         <div class="flex justify-between">
                             <span class="text-gray-600 dark:text-gray-400">Duration:</span>
-                            <span class="font-semibold dark:text-white"><%= tour.duration %></span>
+                            <span class="font-semibold dark:text-white">
+                                <%= tour.duration %>
+                            </span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-gray-600 dark:text-gray-400">Group Size:</span>
-                            <span class="font-semibold dark:text-white"><%= tour.groupSize || 'Not specified' %> max</span>
+                            <span class="font-semibold dark:text-white">
+                                <%= tour.groupSize || 'Not specified' %> max
+                            </span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-gray-600 dark:text-gray-400">Difficulty:</span>
-                            <span class="font-semibold dark:text-white"><%= tour.difficulty %></span>
+                            <span class="font-semibold dark:text-white">
+                                <%= tour.difficulty %>
+                            </span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-gray-600 dark:text-gray-400">Starting Point:</span>
-                            <span class="font-semibold dark:text-white"><%= tour.startingPoint || 'Not specified' %></span>
+                            <span class="font-semibold dark:text-white">
+                                <%= tour.startingPoint || 'Not specified' %>
+                            </span>
                         </div>
                         <% if (tour.price) { %>
-                        <div class="flex justify-between">
-                            <span class="text-gray-600 dark:text-gray-400">Price:</span>
-                            <span class="font-semibold dark:text-white">₹<%= tour.price.toLocaleString() %></span>
-                        </div>
-                        <% } %>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">Price:</span>
+                                <span class="font-semibold dark:text-white">₹<%= tour.price.toLocaleString() %></span>
+                            </div>
+                            <% } %>
                     </div>
-                    <button class="!rounded-button bg-custom text-white px-6 py-3 w-full mb-4">Book Now</button>
-                    <button class="!rounded-button border-2 border-custom text-custom bg-transparent px-6 py-3 w-full">Download Brochure</button>
+                    <a href="https://wa.me/918238773780"
+                        class="!rounded-button bg-custom text-white px-6 py-3 w-full mb-4 block text-center">Book
+                        Now</a>
+                    <% if (tour.downloadLink) { %>
+                        <a href="<%= tour.downloadLink %>" target="_blank"
+                            class="!rounded-button border-2 border-custom text-custom bg-transparent px-6 py-3 w-full block text-center">Download
+                            Brochure</a>
+                        <% } else { %>
+                            <button
+                                class="!rounded-button border-2 border-custom text-custom bg-transparent px-6 py-3 w-full"
+                                disabled>Brochure Coming Soon</button>
+                            <% } %>
                 </div>
             </div>
         </div>
-        
+
         <!-- 4. Popular Attractions -->
-        <% if (tour.attractions && tour.attractions.length > 0) { %>
-        <section class="py-16">
-            <div class="max-w-8xl mx-auto px-6">
-                <h2 class="text-4xl font-bold text-center mb-12 dark:text-white">Popular Attractions</h2>
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                    <% tour.attractions.forEach(attraction => { %>
-                        <div class="group rounded-xl overflow-hidden shadow-lg">
-                            <div class="relative h-64 overflow-hidden">
-                                <img src="<%= attraction.imageUrl %>" 
-                                     class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-                                     alt="<%= attraction.name %>" />
+        <% if (tour.attractions && tour.attractions.length> 0) { %>
+            <section class="py-16">
+                <div class="max-w-8xl mx-auto px-6">
+                    <h2 class="text-4xl font-bold text-center mb-12 dark:text-white">Popular Attractions</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                        <% tour.attractions.forEach(attraction=> { %>
+                            <div class="group rounded-xl overflow-hidden shadow-lg h-[400px]">
+                                <div class="relative h-64 overflow-hidden">
+                                    <img src="<%= attraction.imageUrl %>"
+                                        class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                                        alt="<%= attraction.name %>" />
+                                </div>
+                                <div class="p-6 bg-white dark:bg-gray-800">
+                                    <h3 class="text-xl font-semibold mb-2 dark:text-white">
+                                        <%= attraction.name %>
+                                    </h3>
+                                    <p class="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
+                                        <%= attraction.description %>
+                                    </p>
+                                    <a href="#" class="text-custom hover:text-custom/80">Learn more →</a>
+                                </div>
                             </div>
-                            <div class="p-6 bg-white dark:bg-gray-800">
-                                <h3 class="text-xl font-semibold mb-2 dark:text-white"><%= attraction.name %></h3>
-                                <p class="text-gray-600 dark:text-gray-400 mb-4"><%= attraction.description %></p>
-                                <a href="#" class="text-custom hover:text-custom/80">Learn more →</a>
+                            <% }); %>
+                    </div>
+                </div>
+            </section>
+            <% } %>
+
+                <!-- 5. Frequently Asked Questions -->
+                <% if (faqs && faqs.length> 0) { %>
+                    <section class="py-16 bg-gray-50 dark:bg-gray-800 rounded-2xl">
+                        <div class="max-w-8xl mx-auto px-6">
+                            <h2 class="text-4xl font-bold text-center mb-12 dark:text-white">Frequently Asked Questions
+                            </h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <% faqs.forEach(faq=> { %>
+                                    <div
+                                        class="faq-item bg-white dark:bg-gray-700 rounded-xl p-6 cursor-pointer transition-all hover:shadow-lg">
+                                        <div class="flex justify-between items-center">
+                                            <h3 class="text-lg font-semibold dark:text-white">
+                                                <%= faq.question %>
+                                            </h3>
+                                            <i class="fas fa-chevron-down text-custom transition-transform"></i>
+                                        </div>
+                                        <div class="faq-answer mt-4 text-gray-600 dark:text-gray-300 hidden overflow-hidden transition-all duration-300"
+                                            style="max-height: 0;">
+                                            <%= faq.answer %>
+                                        </div>
+                                    </div>
+                                    <% }); %>
                             </div>
                         </div>
-                    <% }); %>
-                </div>
-            </div>
-        </section>
-        <% } %>
-        
-        <!-- 5. Frequently Asked Questions -->
-        <% if (tour.faqs && tour.faqs.length > 0) { %>
-        <section class="py-16 bg-gray-50 dark:bg-gray-800 rounded-2xl">
-            <div class="max-w-8xl mx-auto px-6">
-                <h2 class="text-4xl font-bold text-center mb-12 dark:text-white">Frequently Asked Questions</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <% tour.faqs.forEach(faq => { %>
-                        <div class="faq-item bg-white dark:bg-gray-700 rounded-xl p-6 cursor-pointer transition-all hover:shadow-lg">
-                            <div class="flex justify-between items-center">
-                                <h3 class="text-lg font-semibold dark:text-white"><%= faq.question %></h3>
-                                <i class="fas fa-chevron-down text-custom transition-transform"></i>
-                            </div>
-                            <div class="faq-answer mt-4 text-gray-600 dark:text-gray-300 hidden overflow-hidden transition-all duration-300" style="max-height: 0;"><%= faq.answer %></div>
-                        </div>
-                    <% }); %>
-                </div>
-            </div>
-        </section>
-        <% } %>
-    
-    <footer id="Footer" class="bg-gray-900 text-white py-16">
+                    </section>
+                    <% } %>
+    </main>
+    <footer id="Footer" class="bg-gray-900 text-white py-16 w-full">
         <div class="max-w-8xl mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
                 <div>
                     <div class="text-4xl font-bold italic tracking-wider mb-6">
                         <span class="text-custom">5</span>STARJOURNEY
                     </div>
-                    <p class="text-gray-400">At 5starjourney, we turn your travel dreams into unforgettable adventures. Trusted by explorers worldwide, we’re known for delivering authentic, expertly crafted experiences.</p>
+                    <p class="text-gray-400">At 5starjourney, we turn your travel dreams into unforgettable adventures.
+                        Trusted by explorers worldwide, we're known for delivering authentic, expertly crafted
+                        experiences.</p>
                 </div>
                 <div>
                     <h3 class="font-semibold text-lg mb-4">Quick Links</h3>
                     <ul class="space-y-2">
                         <li><a href="#" class="text-gray-400 hover:text-custom">Home</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-custom">Services</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-custom">About Us</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-custom">Testimonial</a></li>
+                        <li><a href="/#Services" class="text-gray-400 hover:text-custom">Services</a></li>
+                        <li><a href="/#About" class="text-gray-400 hover:text-custom">About Us</a></li>
+                        <li><a href="/#Testimonial" class="text-gray-400 hover:text-custom">Testimonial</a></li>
                     </ul>
                 </div>
                 <div>
                     <h3 class="font-semibold text-lg mb-4">Contact Us</h3>
                     <ul class="space-y-2">
-                        <li class="flex items-center"><i class="fas fa-map-marker-alt w-6 text-custom"></i>Vadodara, Gujarat, India</li>
+                        <li class="flex items-center"><i class="fas fa-map-marker-alt w-6 text-custom"></i>Vadodara,
+                            Gujarat, India</li>
                         <li class="flex items-center"><i class="fas fa-phone w-6 text-custom"></i> +91 8238773780</li>
                         <li class="flex items-center"><i class="fas fa-phone w-6 text-custom"></i> +91 9081747677</li>
-                        <li class="flex items-center"><i class="fas fa-envelope w-6 text-custom"></i>info.5starjourney@gmail.com</li>
+                        <li class="flex items-center"><i
+                                class="fas fa-envelope w-6 text-custom"></i>info.5starjourney@gmail.com</li>
                     </ul>
                 </div>
                 <div>
                     <h3 class="font-semibold text-lg mb-4">Follow Us</h3>
                     <div class="flex space-x-4">
                         <div class="flex flex-col space-y-4">
-                            <a href="https://www.facebook.com/profile.php?id=61574766787319" class="text-gray-400 hover:text-custom" title="Facebook - 5starjourney" onclick="window.open(this.href, '_blank'); return false;">
+                            <a href="https://www.facebook.com/profile.php?id=61574766787319"
+                                class="text-gray-400 hover:text-custom" title="Facebook - 5starjourney"
+                                onclick="window.open(this.href, '_blank'); return false;">
                                 <i class="fab fa-facebook-f fa-lg"></i>
                                 <span class="text-custom font-bold ml-3">5starjourney</span>
                             </a>
-                            
-                            <a href="https://www.instagram.com/travel_5starjourney?igsh=MWh4NTM2aGxoZGdlcA==" class="text-gray-400 hover:text-custom" title="Instagram - @travel_5starjourney" onclick="window.open(this.href, '_blank'); return false;">
+
+                            <a href="https://www.instagram.com/travel_5starjourney?igsh=MWh4NTM2aGxoZGdlcA=="
+                                class="text-gray-400 hover:text-custom" title="Instagram - @travel_5starjourney"
+                                onclick="window.open(this.href, '_blank'); return false;">
                                 <i class="fab fa-instagram fa-lg"></i>
                                 <span class="text-custom font-bold ml-2">travel_5starjourney</span>
                             </a>
@@ -343,35 +418,42 @@
     </footer>
 
     <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/918238773780" target="_blank" class="fixed bottom-4 right-4 z-50 flex items-center bg-[#25D366] text-white rounded-full hover:bg-[#128C7E] transition-colors duration-300 shadow-lg">
+    <a href="https://wa.me/918238773780" target="_blank"
+        class="fixed bottom-4 right-4 z-50 flex items-center bg-[#25D366] text-white rounded-full hover:bg-[#128C7E] transition-colors duration-300 shadow-lg">
         <div class="w-12 h-12">
             <svg viewBox="0 0 1024 1024" class="w-full h-full">
                 <defs>
-                    <path id="whatsapp-icon" d="M1023.941 765.153c0 5.606-.171 17.766-.508 27.159-.824 22.982-2.646 52.639-5.401 66.151-4.141 20.306-10.392 39.472-18.542 55.425-9.643 18.871-21.943 35.775-36.559 50.364-14.584 14.56-31.472 26.812-50.315 36.416-16.036 8.172-35.322 14.426-55.744 18.549-13.378 2.701-42.812 4.488-65.648 5.3-9.402.336-21.564.505-27.15.505l-504.226-.081c-5.607 0-17.765-.172-27.158-.509-22.983-.824-52.639-2.646-66.152-5.4-20.306-4.142-39.473-10.392-55.425-18.542-18.872-9.644-35.775-21.944-50.364-36.56-14.56-14.584-26.812-31.471-36.415-50.314-8.174-16.037-14.428-35.323-18.551-55.744-2.7-13.378-4.487-42.812-5.3-65.649-.334-9.401-.503-21.563-.503-27.148l.08-504.228c0-5.607.171-17.766.508-27.159.825-22.983 2.646-52.639 5.401-66.151 4.141-20.306 10.391-39.473 18.542-55.426C34.154 93.24 46.455 76.336 61.07 61.747c14.584-14.559 31.472-26.812 50.315-36.416 16.037-8.172 35.324-14.426 55.745-18.549 13.377-2.701 42.812-4.488 65.648-5.3 9.402-.335 21.565-.504 27.149-.504l504.227.081c5.608 0 17.766.171 27.159.508 22.983.825 52.638 2.646 66.152 5.401 20.305 4.141 39.472 10.391 55.425 18.542 18.871 9.643 35.774 21.944 50.363 36.559 14.559 14.584 26.812 31.471 36.415 50.315 8.174 16.037 14.428 35.323 18.551 55.744 2.7 13.378 4.486 42.812 5.3 65.649.335 9.402.504 21.564.504 27.15l-.082 504.226z"></path>
+                    <path id="whatsapp-icon"
+                        d="M1023.941 765.153c0 5.606-.171 17.766-.508 27.159-.824 22.982-2.646 52.639-5.401 66.151-4.141 20.306-10.392 39.472-18.542 55.425-9.643 18.871-21.943 35.775-36.559 50.364-14.584 14.56-31.472 26.812-50.315 36.416-16.036 8.172-35.322 14.426-55.744 18.549-13.378 2.701-42.812 4.488-65.648 5.3-9.402.336-21.564.505-27.15.505l-504.226-.081c-5.607 0-17.765-.172-27.158-.509-22.983-.824-52.639-2.646-66.152-5.4-20.306-4.142-39.473-10.392-55.425-18.542-18.872-9.644-35.775-21.944-50.364-36.56-14.56-14.584-26.812-31.471-36.415-50.314-8.174-16.037-14.428-35.323-18.551-55.744-2.7-13.378-4.487-42.812-5.3-65.649-.334-9.401-.503-21.563-.503-27.148l.08-504.228c0-5.607.171-17.766.508-27.159.825-22.983 2.646-52.639 5.401-66.151 4.141-20.306 10.391-39.473 18.542-55.426C34.154 93.24 46.455 76.336 61.07 61.747c14.584-14.559 31.472-26.812 50.315-36.416 16.037-8.172 35.324-14.426 55.745-18.549 13.377-2.701 42.812-4.488 65.648-5.3 9.402-.335 21.565-.504 27.149-.504l504.227.081c5.608 0 17.766.171 27.159.508 22.983.825 52.638 2.646 66.152 5.401 20.305 4.141 39.472 10.391 55.425 18.542 18.871 9.643 35.774 21.944 50.363 36.559 14.559 14.584 26.812 31.471 36.415 50.315 8.174 16.037 14.428 35.323 18.551 55.744 2.7 13.378 4.486 42.812 5.3 65.649.335 9.402.504 21.564.504 27.15l-.082 504.226z">
+                    </path>
                 </defs>
-                <linearGradient id="whatsapp-gradient" gradientUnits="userSpaceOnUse" x1="512.001" y1=".978" x2="512.001" y2="1025.023">
+                <linearGradient id="whatsapp-gradient" gradientUnits="userSpaceOnUse" x1="512.001" y1=".978"
+                    x2="512.001" y2="1025.023">
                     <stop offset="0" stop-color="#61fd7d"></stop>
                     <stop offset="1" stop-color="#2bb826"></stop>
                 </linearGradient>
                 <use href="#whatsapp-icon" fill="url(#whatsapp-gradient)"></use>
                 <g>
-                    <path fill="#FFFFFF" d="M783.302 243.246c-69.329-69.387-161.529-107.619-259.763-107.658-202.402 0-367.133 164.668-367.214 367.072-.026 64.699 16.883 127.854 49.017 183.522l-52.096 190.229 194.665-51.047c53.636 29.244 114.022 44.656 175.482 44.682h.151c202.382 0 367.128-164.688 367.21-367.094.039-98.087-38.121-190.319-107.452-259.706zM523.544 808.047h-.125c-54.767-.021-108.483-14.729-155.344-42.529l-11.146-6.612-115.517 30.293 30.834-112.592-7.259-11.544c-30.552-48.579-46.688-104.729-46.664-162.379.066-168.229 136.985-305.096 305.339-305.096 81.521.031 158.154 31.811 215.779 89.482s89.342 134.332 89.312 215.859c-.066 168.243-136.984 305.118-305.209 305.118zm167.415-228.515c-9.177-4.591-54.286-26.782-62.697-29.843-8.41-3.062-14.526-4.592-20.645 4.592-6.115 9.182-23.699 29.843-29.053 35.964-5.352 6.122-10.704 6.888-19.879 2.296-9.176-4.591-38.74-14.277-73.786-45.526-27.275-24.319-45.691-54.359-51.043-63.543-5.352-9.183-.569-14.146 4.024-18.72 4.127-4.109 9.175-10.713 13.763-16.069 4.587-5.355 6.117-9.183 9.175-15.304 3.059-6.122 1.529-11.479-.765-16.07-2.293-4.591-20.644-49.739-28.29-68.104-7.447-17.886-15.013-15.466-20.645-15.747-5.346-.266-11.469-.322-17.585-.322s-16.057 2.295-24.467 11.478-32.113 31.374-32.113 76.521c0 45.147 32.877 88.764 37.465 94.885 4.588 6.122 64.699 98.771 156.741 138.502 21.892 9.45 38.982 15.094 52.308 19.322 21.98 6.979 41.982 5.995 57.793 3.634 17.628-2.633 54.284-22.189 61.932-43.615 7.646-21.427 7.646-39.791 5.352-43.617-2.294-3.826-8.41-6.122-17.585-10.714z"></path>
+                    <path fill="#FFFFFF"
+                        d="M783.302 243.246c-69.329-69.387-161.529-107.619-259.763-107.658-202.402 0-367.133 164.668-367.214 367.072-.026 64.699 16.883 127.854 49.017 183.522l-52.096 190.229 194.665-51.047c53.636 29.244 114.022 44.656 175.482 44.682h.151c202.382 0 367.128-164.688 367.21-367.094.039-98.087-38.121-190.319-107.452-259.706zM523.544 808.047h-.125c-54.767-.021-108.483-14.729-155.344-42.529l-11.146-6.612-115.517 30.293 30.834-112.592-7.259-11.544c-30.552-48.579-46.688-104.729-46.664-162.379.066-168.229 136.985-305.096 305.339-305.096 81.521.031 158.154 31.811 215.779 89.482s89.342 134.332 89.312 215.859c-.066 168.243-136.984 305.118-305.209 305.118zm167.415-228.515c-9.177-4.591-54.286-26.782-62.697-29.843-8.41-3.062-14.526-4.592-20.645 4.592-6.115 9.182-23.699 29.843-29.053 35.964-5.352 6.122-10.704 6.888-19.879 2.296-9.176-4.591-38.74-14.277-73.786-45.526-27.275-24.319-45.691-54.359-51.043-63.543-5.352-9.183-.569-14.146 4.024-18.72 4.127-4.109 9.175-10.713 13.763-16.069 4.587-5.355 6.117-9.183 9.175-15.304 3.059-6.122 1.529-11.479-.765-16.07-2.293-4.591-20.644-49.739-28.29-68.104-7.447-17.886-15.013-15.466-20.645-15.747-5.346-.266-11.469-.322-17.585-.322s-16.057 2.295-24.467 11.478-32.113 31.374-32.113 76.521c0 45.147 32.877 88.764 37.465 94.885 4.588 6.122 64.699 98.771 156.741 138.502 21.892 9.45 38.982 15.094 52.308 19.322 21.98 6.979 41.982 5.995 57.793 3.634 17.628-2.633 54.284-22.189 61.932-43.615 7.646-21.427 7.646-39.791 5.352-43.617-2.294-3.826-8.41-6.122-17.585-10.714z">
+                    </path>
                 </g>
             </svg>
         </div>
     </a>
+
     <script src="/js/carousel.js"></script>
-    
+
     <!-- FAQ Toggle Script -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const faqItems = document.querySelectorAll('.faq-item');
-            
+
             faqItems.forEach(item => {
-                item.addEventListener('click', function() {
+                item.addEventListener('click', function () {
                     const answer = this.querySelector('.faq-answer');
                     const icon = this.querySelector('.fa-chevron-down');
-                    
+
                     // Toggle the answer visibility
                     if (answer.classList.contains('hidden')) {
                         // Show the answer
@@ -382,7 +464,7 @@
                         // Hide the answer
                         answer.style.maxHeight = '0';
                         icon.style.transform = 'rotate(0deg)';
-                        
+
                         // Add a delay before hiding to allow the animation to complete
                         setTimeout(() => {
                             answer.classList.add('hidden');
@@ -393,4 +475,5 @@
         });
     </script>
 </body>
+
 </html>
