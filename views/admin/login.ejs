@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Admin Login | 5starjourney</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com/3.4.5?plugins=forms@0.5.7,typography@0.5.13"></script>
+    <script src="https://ai-public.creatie.ai/gen_page/tailwind-config.min.js" data-color="#ff0066" data-border-radius="medium"></script>
+</head>
+<body>
+    <div  class="bg-gray-100 dark:bg-gray-900 min-h-screen flex items-center justify-center">
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg w-full max-w-md">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold dark:text-white mb-2">
+                    <span class="text-[#ff0066]">5</span>STARJOURNEY
+                </h1>
+                <p class="text-gray-600 dark:text-gray-400">Admin Panel</p>
+            </div>
+        
+            <form action="/admin/login" method="POST" class="space-y-6">
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email</label>
+                    <input type="email" id="email" name="email" required
+                           class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#ff0066] focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                           placeholder="admin@example.com">
+                </div>
+        
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Password</label>
+                    <input type="password" id="password" name="password" required
+                           class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#ff0066] focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                           placeholder="••••••••">
+                </div>
+                <% if (locals.error) { %>
+                <div class="text-red-500 text-sm">
+                    <%= error %>
+                </div>
+                <% } %>
+        
+                <button type="submit"
+                        class="w-full bg-[#ff0066] text-white py-2 px-4 rounded-lg hover:bg-[#ff0066]/90 transition-colors duration-200">
+                    Sign In
+                </button>
+            </form>
+        
+            <div class="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
+                Back to <a href="/" class="text-[#ff0066] hover:underline">Homepage</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

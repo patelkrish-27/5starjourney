@@ -1,0 +1,102 @@
+{
+    "tours": {
+        "tour1": {
+            "title": "Everest Base Camp Trek",
+            "slug": "everest-base-camp-trek",
+            "status": "active",
+            "images": [
+                "https://images.unsplash.com/photo-1516690561799-46d8f74f9abf",
+                "https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b",
+                "https://images.unsplash.com/photo-1544735716-392fe2489ffa"
+            ],
+            "duration": "14 days",
+            "startingPoint": "Kathmandu",
+            "difficulty": "Challenging",
+            "groupSize": "2-12",
+            "price": 2499,
+            "description": "Experience the majestic Everest Base Camp trek through the heart of the Himalayas. Walk in the footsteps of legendary mountaineers and immerse yourself in Sherpa culture while witnessing breathtaking mountain vistas.",
+            "highlights": [
+                "View of Mt. Everest",
+                "Sherpa Culture Experience",
+                "Buddhist Monasteries Visit",
+                "Namche Bazaar Explorer",
+                "Kala Patthar Sunrise"
+            ],
+            "itinerary": {
+                "day1": {
+                    "title": "Arrival in Kathmandu",
+                    "description": "Welcome meeting and trip briefing"
+                },
+                "day2": {
+                    "title": "Fly to Lukla, Trek to Phakding",
+                    "description": "Scenic mountain flight and easy trek"
+                },
+                "day3": {
+                    "title": "Trek to Namche Bazaar",
+                    "description": "Steep climb with first views of Everest"
+                }
+            },
+            "attractions": [
+                {
+                    "name": "Namche Bazaar",
+                    "imageUrl": "https://images.unsplash.com/photo-1544735716-392fe2489ffa",
+                    "description": "Historic trading hub and gateway to Everest"
+                },
+                {
+                    "name": "Tengboche Monastery",
+                    "imageUrl": "https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b",
+                    "description": "Largest Buddhist monastery in the Khumbu region"
+                }
+            ]
+        },
+        "tour2": {
+            "title": "Annapurna Circuit",
+            "slug": "annapurna-circuit",
+            "status": "active",
+            "images": [
+                "https://images.unsplash.com/photo-1544735716-392fe2489ffa",
+                "https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b",
+                "https://images.unsplash.com/photo-1516690561799-46d8f74f9abf"
+            ],
+            "duration": "21 days",
+            "startingPoint": "Pokhara",
+            "difficulty": "Moderate",
+            "groupSize": "4-15",
+            "price": 1899,
+            "description": "Complete the legendary circuit around the Annapurna massif, crossing the challenging Thorong La Pass and experiencing diverse landscapes from subtropical forests to high-altitude deserts.",
+            "highlights": [
+                "Thorong La Pass (5416m)",
+                "Muktinath Temple",
+                "Tilicho Lake Visit",
+                "Hot Springs at Tatopani",
+                "Apple Orchards of Marpha"
+            ],
+            "itinerary": {
+                "day1": {
+                    "title": "Arrive in Pokhara",
+                    "description": "Trip briefing and preparation"
+                },
+                "day2": {
+                    "title": "Drive to Besisahar",
+                    "description": "Start of the trek, gentle walk to Bhulbhule"
+                },
+                "day3": {
+                    "title": "Trek to Jagat",
+                    "description": "Follow the Marsyangdi River valley"
+                }
+            },
+            "attractions": [
+                {
+                    "name": "Manang Village",
+                    "imageUrl": "https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b",
+                    "description": "Ancient Tibetan-style village with stunning mountain views"
+                },
+                {
+                    "name": "Muktinath Temple",
+                    "imageUrl": "https://images.unsplash.com/photo-1516690561799-46d8f74f9abf",
+                    "description": "Sacred temple for both Hindus and Buddhists"
+                }
+            ]
+        }
+    }
+}

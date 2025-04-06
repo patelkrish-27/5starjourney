@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Admin Dashboard | 5starjourney</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com/3.4.5?plugins=forms@0.5.7,typography@0.5.13"></script>
+    <script src="https://ai-public.creatie.ai/gen_page/tailwind-config.min.js" data-color="#ff0066" data-border-radius="medium"></script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900">
+    <!-- Sidebar -->
+    <aside class="fixed left-0 top-0 h-screen w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700">
+        <div class="p-6">
+            <h1 class="text-2xl font-bold dark:text-white">
+                <span class="text-[#ff0066]">5</span>STARJOURNEY
+            </h1>
+            <p class="text-sm text-gray-600 dark:text-gray-400">Admin Panel</p>
+        </div>
+        
+        <nav class="mt-6">
+            <a href="/admin/dashboard" class="flex items-center px-6 py-3 text-gray-700 dark:text-white bg-gray-100 dark:bg-gray-700 border-l-4 border-[#ff0066]">
+                <i class="fas fa-globe w-5"></i>
+                <span class="mx-4">Tour Management</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="ml-64 p-8">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h2 class="text-2xl font-bold dark:text-white">Tour Management</h2>
+                <p class="text-gray-600 dark:text-gray-400">Manage your tours and packages</p>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <button id="addTourBtn" class="bg-[#ff0066] text-white px-4 py-2 rounded-lg hover:bg-[#ff0066]/90 transition-colors duration-200">
+                    <i class="fas fa-plus mr-2"></i>Add New Tour
+                </button>
+                <form action="/admin/logout" method="POST" class="inline">
+                    <button type="submit" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors duration-200">
+                        Logout
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Stats Grid - Updated to show domestic and international tour counts -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <!-- Total Tours -->
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 dark:text-gray-400">Total Tours</p>
+                        <h3 class="text-2xl font-bold dark:text-white"><%= stats.totalTours %></h3>
+                    </div>
+                    <div class="bg-blue-100 dark:bg-blue-900 p-3 rounded-lg">
+                        <i class="fas fa-globe text-blue-500 dark:text-blue-300"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- International Tours -->
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 dark:text-gray-400">International Tours</p>
+                        <h3 class="text-2xl font-bold dark:text-white"><%= stats.internationalTours %></h3>
+                    </div>
+                    <div class="bg-green-100 dark:bg-green-900 p-3 rounded-lg">
+                        <i class="fas fa-plane text-green-500 dark:text-green-300"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Domestic Tours -->
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 dark:text-gray-400">Domestic Tours</p>
+                        <h3 class="text-2xl font-bold dark:text-white"><%= stats.domesticTours %></h3>
+                    </div>
+                    <div class="bg-yellow-100 dark:bg-yellow-900 p-3 rounded-lg">
+                        <i class="fas fa-map-marker-alt text-yellow-500 dark:text-yellow-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tours Table - Update to use correct property names -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden">
+            <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+                <h3 class="text-lg font-semibold dark:text-white">All Tours</h3>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50 dark:bg-gray-700">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Tour Name</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Duration</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">International</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                        <% tours.forEach(tour => { %>
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-medium text-gray-900 dark:text-white"><%= tour.title %></div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-500 dark:text-gray-400"><%= tour.duration %> Days</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                                    <%= tour.category === 'International' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' %>">
+                                    <%= tour.category %>
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <button class="text-blue-600 hover:text-blue-900 mr-3" onclick="editTour('<%= tour.id %>')">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="text-red-600 hover:text-red-900" onclick="deleteTour('<%= tour.id %>')">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add/Edit Tour Modal -->
+    <div id="tourModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-8 max-w-2xl w-full mx-4">
+            <h3 class="text-xl font-bold mb-4 dark:text-white">Add New Tour</h3>
+            <form id="tourForm" class="space-y-4 max-h-[80vh] overflow-y-auto px-2">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tour Name</label>
+                    <input type="text" name="name" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                </div>
+                
+                <!-- Tour Images -->
+                <div class="space-y-2">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tour Images (URLs)</label>
+                    <input type="url" name="imageUrl1" placeholder="Image URL 1" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white mb-2">
+                    <input type="url" name="imageUrl2" placeholder="Image URL 2" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white mb-2">
+                    <input type="url" name="imageUrl3" placeholder="Image URL 3" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                </div>
+
+                <!-- Tour Details -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Duration (Days)</label>
+                        <input type="number" name="duration" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Group Size</label>
+                        <input type="number" name="groupSize" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Difficulty Level</label>
+                    <select name="difficulty" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                        <option value="Easy">Easy</option>
+                        <option value="Moderate">Moderate</option>
+                        <option value="Challenging">Challenging</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tour Category</label>
+                    <select name="category" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                        <option value="International">International</option>
+                        <option value="Domestic">Domestic</option>
+                        <option value="Highlight">Highlight</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description</label>
+                    <textarea name="description" rows="4" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white"></textarea>
+                </div>
+
+                <!-- Highlights -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Highlights (one per line)</label>
+                    <textarea name="highlights" rows="4" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="Enter each highlight on a new line"></textarea>
+                </div>
+
+                <!-- Itinerary -->
+                <div id="itineraryContainer" class="space-y-4">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Itinerary</label>
+                    <div class="itinerary-day border border-gray-200 dark:border-gray-600 p-4 rounded-lg">
+                        <div class="flex justify-between items-center mb-2">
+                            <h4 class="font-medium">Day 1</h4>
+                        </div>
+                        <input type="text" name="itinerary[0][title]" placeholder="Day Title" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white mb-2">
+                        <textarea name="itinerary[0][description]" placeholder="Day Description" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white" rows="2"></textarea>
+                    </div>
+                </div>
+                <button type="button" onclick="addItineraryDay()" class="w-full px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600">
+                    <i class="fas fa-plus mr-2"></i>Add Another Day
+                </button>
+
+                <!-- Popular Attractions -->
+                <div id="attractionsContainer" class="space-y-4">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Popular Attractions</label>
+                    <div class="attraction border border-gray-200 dark:border-gray-600 p-4 rounded-lg">
+                        <input type="text" name="attractions[0][name]" placeholder="Attraction Name" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white mb-2">
+                        <input type="url" name="attractions[0][imageUrl]" placeholder="Attraction Image URL" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white mb-2">
+                        <textarea name="attractions[0][description]" placeholder="Attraction Description" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white" rows="2"></textarea>
+                    </div>
+                </div>
+                <button type="button" onclick="addAttraction()" class="w-full px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600">
+                    <i class="fas fa-plus mr-2"></i>Add Another Attraction
+                </button>
+
+                <div class="flex justify-end space-x-3 pt-4">
+                    <button type="button" onclick="closeModal()" class="px-4 py-2 text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300">Cancel</button>
+                    <button type="submit" class="px-4 py-2 text-white bg-[#ff0066] rounded-lg hover:bg-[#ff0066]/90">Save Tour</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add this script at the end of your dashboard.ejs file -->
+    <script>
+        // Variables for DOM elements
+        const modal = document.getElementById('tourModal');
+        const addTourBtn = document.getElementById('addTourBtn');
+        const tourForm = document.getElementById('tourForm');
+        let itineraryCount = 1;
+        let attractionCount = 1;
+    
+        // Modal functions
+        function closeModal() {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+    
+        function addItineraryDay() {
+            const container = document.getElementById('itineraryContainer');
+            const dayDiv = document.createElement('div');
+            dayDiv.className = 'itinerary-day border border-gray-200 dark:border-gray-600 p-4 rounded-lg';
+            dayDiv.innerHTML = `
+                <div class="flex justify-between items-center mb-2">
+                    <h4 class="font-medium">Day ${itineraryCount + 1}</h4>
+                    <button type="button" onclick="this.parentElement.parentElement.remove()" class="text-red-500">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <input type="text" name="itinerary[${itineraryCount}][title]" placeholder="Day Title" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white mb-2">
+                <textarea name="itinerary[${itineraryCount}][description]" placeholder="Day Description" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white" rows="2"></textarea>
+            `;
+            container.appendChild(dayDiv);
+            itineraryCount++;
+        }
+    
+        function addAttraction() {
+            const container = document.getElementById('attractionsContainer');
+            const attractionDiv = document.createElement('div');
+            attractionDiv.className = 'attraction border border-gray-200 dark:border-gray-600 p-4 rounded-lg';
+            attractionDiv.innerHTML = `
+                <div class="flex justify-between items-center mb-2">
+                    <h4 class="font-medium">Attraction ${attractionCount + 1}</h4>
+                    <button type="button" onclick="this.parentElement.parentElement.remove()" class="text-red-500">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <input type="text" name="attractions[${attractionCount}][name]" placeholder="Attraction Name" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white mb-2">
+                <input type="url" name="attractions[${attractionCount}][imageUrl]" placeholder="Attraction Image URL" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white mb-2">
+                <textarea name="attractions[${attractionCount}][description]" placeholder="Attraction Description" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white" rows="2"></textarea>
+            `;
+            container.appendChild(attractionDiv);
+            attractionCount++;
+        }
+    
+        function resetItineraryAndAttractions() {
+            document.getElementById('itineraryContainer').innerHTML = `
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Itinerary</label>
+                <div class="itinerary-day border border-gray-200 dark:border-gray-600 p-4 rounded-lg">
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="font-medium">Day 1</h4>
+                    </div>
+                    <input type="text" name="itinerary[0][title]" placeholder="Day Title" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white mb-2">
+                    <textarea name="itinerary[0][description]" placeholder="Day Description" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white" rows="2"></textarea>
+                </div>
+            `;
+            
+            document.getElementById('attractionsContainer').innerHTML = `
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Popular Attractions</label>
+                <div class="attraction border border-gray-200 dark:border-gray-600 p-4 rounded-lg">
+                    <input type="text" name="attractions[0][name]" placeholder="Attraction Name" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white mb-2">
+                    <input type="url" name="attractions[0][imageUrl]" placeholder="Attraction Image URL" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white mb-2">
+                    <textarea name="attractions[0][description]" placeholder="Attraction Description" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white" rows="2"></textarea>
+                </div>
+            `;
+            
+            itineraryCount = 1;
+            attractionCount = 1;
+        }
+    
+        // Tour operations
+        async function editTour(tourId) {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            try {
+                const response = await fetch(`/admin/tours/${tourId}`);
+                if (!response.ok) throw new Error('Failed to fetch tour');
+                
+                const tour = await response.json();
+                
+                // Fill form with tour data
+                tourForm.reset();
+                resetItineraryAndAttractions();
+                
+                tourForm.elements.name.value = tour.title;
+                
+                // Fill images
+                if (tour.images && tour.images.length > 0) {
+                    for (let i = 0; i < Math.min(tour.images.length, 3); i++) {
+                        tourForm.elements[`imageUrl${i+1}`].value = tour.images[i];
+                    }
+                }
+                
+                // Fill other fields
+                tourForm.elements.duration.value = parseInt(tour.duration);
+                tourForm.elements.groupSize.value = parseInt(tour.groupSize);
+                tourForm.elements.difficulty.value = tour.difficulty;
+                tourForm.elements.description.value = tour.description;
+                tourForm.elements.highlights.value = tour.highlights.join('\n');
+                
+                // Fill itinerary
+                if (tour.itinerary) {
+                    const itineraryContainer = document.getElementById('itineraryContainer');
+                    itineraryContainer.innerHTML = '<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Itinerary</label>';
+                    
+                    let dayIndex = 0;
+                    for (const day in tour.itinerary) {
+                        const dayData = tour.itinerary[day];
+                        const dayDiv = document.createElement('div');
+                        dayDiv.className = 'itinerary-day border border-gray-200 dark:border-gray-600 p-4 rounded-lg';
+                        dayDiv.innerHTML = `
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="font-medium">Day ${dayIndex + 1}</h4>
+                                ${dayIndex > 0 ? `<button type="button" onclick="this.parentElement.parentElement.remove()" class="text-red-500">
+                                    <i class="fas fa-times"></i>
+                                </button>` : ''}
+                            </div>
+                            <input type="text" name="itinerary[${dayIndex}][title]" value="${dayData.title}" placeholder="Day Title" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white mb-2">
+                            <textarea name="itinerary[${dayIndex}][description]" placeholder="Day Description" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white" rows="2">${dayData.description}</textarea>
+                        `;
+                        itineraryContainer.appendChild(dayDiv);
+                        dayIndex++;
+                    }
+                    itineraryCount = dayIndex;
+                }
+                
+                // Fill attractions
+                if (tour.attractions && tour.attractions.length > 0) {
+                    const attractionsContainer = document.getElementById('attractionsContainer');
+                    attractionsContainer.innerHTML = '<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Popular Attractions</label>';
+                    
+                    tour.attractions.forEach((attraction, index) => {
+                        const attractionDiv = document.createElement('div');
+                        attractionDiv.className = 'attraction border border-gray-200 dark:border-gray-600 p-4 rounded-lg';
+                        attractionDiv.innerHTML = `
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="font-medium">Attraction ${index + 1}</h4>
+                                ${index > 0 ? `<button type="button" onclick="this.parentElement.parentElement.remove()" class="text-red-500">
+                                    <i class="fas fa-times"></i>
+                                </button>` : ''}
+                            </div>
+                            <input type="text" name="attractions[${index}][name]" value="${attraction.name}" placeholder="Attraction Name" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white mb-2">
+                            <input type="url" name="attractions[${index}][imageUrl]" value="${attraction.imageUrl}" placeholder="Attraction Image URL" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white mb-2">
+                            <textarea name="attractions[${index}][description]" placeholder="Attraction Description" required class="w-full rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white" rows="2">${attraction.description}</textarea>
+                        `;
+                        attractionsContainer.appendChild(attractionDiv);
+                    });
+                    attractionCount = tour.attractions.length;
+                }
+                
+                // Set form mode to edit
+                tourForm.dataset.mode = 'edit';
+                tourForm.dataset.tourId = tourId;
+                
+            } catch (error) {
+                console.error('Error fetching tour:', error);
+                alert('Failed to load tour data');
+            }
+        }
+    
+        async function deleteTour(tourId) {
+            if (confirm('Are you sure you want to delete this tour?')) {
+                try {
+                    const response = await fetch(`/admin/tours/${tourId}`, {
+                        method: 'DELETE'
+                    });
+                    
+                    if (!response.ok) throw new Error('Failed to delete tour');
+                    
+                    // Refresh the page to show updated data
+                    window.location.reload();
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Failed to delete tour');
+                }
+            }
+        }
+    
+        // Form submission
+        tourForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(tourForm);
+            const tourData = {
+                title: formData.get('name'),
+                images: [
+                    formData.get('imageUrl1'),
+                    formData.get('imageUrl2'),
+                    formData.get('imageUrl3')
+                ].filter(url => url), // Remove empty URLs
+                duration: formData.get('duration') + ' days',
+                groupSize: formData.get('groupSize'),
+                difficulty: formData.get('difficulty'),
+                description: formData.get('description'),
+                highlights: formData.get('highlights').split('\n').filter(h => h.trim()),
+                category: formData.get('category'), // Add category to tour data
+                status: 'active', // Default to active
+                itinerary: {},
+                attractions: []
+            };
+    
+            // Collect itinerary data
+            const itineraryDays = document.querySelectorAll('.itinerary-day');
+            itineraryDays.forEach((day, index) => {
+                tourData.itinerary[`day${index+1}`] = {
+                    title: formData.get(`itinerary[${index}][title]`),
+                    description: formData.get(`itinerary[${index}][description]`)
+                };
+            });
+    
+            // Collect attractions data
+            const attractions = document.querySelectorAll('.attraction');
+            attractions.forEach((attraction, index) => {
+                tourData.attractions.push({
+                    name: formData.get(`attractions[${index}][name]`),
+                    imageUrl: formData.get(`attractions[${index}][imageUrl]`),
+                    description: formData.get(`attractions[${index}][description]`)
+                });
+            });
+            
+            try {
+                const url = tourForm.dataset.mode === 'edit' 
+                    ? `/admin/tours/${tourForm.dataset.tourId}` 
+                    : '/admin/tours';
+                const method = tourForm.dataset.mode === 'edit' ? 'PUT' : 'POST';
+                
+                const response = await fetch(url, {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(tourData)
+                });
+    
+                if (!response.ok) throw new Error('ah! Failed to save tour');
+    
+                // Refresh the page to show updated data
+                window.location.reload();
+            } catch (error) {
+                console.error('Error saving tour:', error);
+                alert('Failed to save tour. Please try again.');
+            }
+        });
+    
+        // Initialize event listeners
+        addTourBtn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            tourForm.reset();
+            resetItineraryAndAttractions();
+            tourForm.dataset.mode = 'add';
+        });
+    </script>

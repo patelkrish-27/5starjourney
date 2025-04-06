@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Tours Management | 5starjourney</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com/3.4.5?plugins=forms@0.5.7,typography@0.5.13"></script>
+    <script src="https://ai-public.creatie.ai/gen_page/tailwind-config.min.js" data-color="#ff0066" data-border-radius="medium"></script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900">
+    <!-- Sidebar -->
+    <aside class="fixed left-0 top-0 h-screen w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700">
+        <div class="p-6">
+            <h1 class="text-2xl font-bold dark:text-white">
+                <span class="text-[#ff0066]">5</span>STARJOURNEY
+            </h1>
+            <p class="text-sm text-gray-600 dark:text-gray-400">Admin Panel</p>
+        </div>
+        
+        <nav class="mt-6">
+            <a href="/admin/dashboard" class="flex items-center px-6 py-3 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                <i class="fas fa-tachometer-alt w-5"></i>
+                <span class="mx-4">Dashboard</span>
+            </a>
+            
+            <a href="/admin/tours" class="flex items-center px-6 py-3 text-gray-700 dark:text-white bg-gray-100 dark:bg-gray-700 border-l-4 border-[#ff0066]">
+                <i class="fas fa-globe w-5"></i>
+                <span class="mx-4">Tours</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="ml-64 p-8">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h2 class="text-2xl font-bold dark:text-white">Tours Management</h2>
+                <p class="text-gray-600 dark:text-gray-400 mt-1">Create and manage your tour packages</p>
+            </div>
+            <button id="createTourBtn" class="bg-[#ff0066] text-white px-4 py-2 rounded-lg hover:bg-[#e6005c] transition-colors">
+                <i class="fas fa-plus mr-2"></i>Create New Tour
+            </button>
+        </div>
+
+        <!-- Tours List -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50 dark:bg-gray-700">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Tour Name</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Duration</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Type</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Price</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Category</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                        <!-- Sample Tour Row -->
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-medium text-gray-900 dark:text-white">Bali Cultural Adventure</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-500 dark:text-gray-400">7 days</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-500 dark:text-gray-400">Cultural</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-500 dark:text-gray-400">$1,299</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">International</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <button class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300 mr-3">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Tour Form Modal -->
+        <div id="tourModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+            <div class="relative top-20 mx-auto p-5 border w-3/4 shadow-lg rounded-md bg-white dark:bg-gray-800">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-white" id="modalTitle">Create New Tour</h3>
+                    <button id="closeModal" class="text-gray-400 hover:text-gray-500">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form id="tourForm" class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Tour Name</label>
+                            <input type="text" name="tourName" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Duration (days)</label>
+                            <input type="number" name="duration" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Tour Type</label>
+                            <select name="tourType" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                <option value="Cultural">Cultural</option>
+                                <option value="Adventure">Adventure</option>
+                                <option value="Beach">Beach</option>
+                                <option value="Wildlife">Wildlife</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Category</label>
+                            <select name="category" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                <option value="International">International</option>
+                                <option value="Domestic">Domestic</option>
+                                <option value="Highlight">Highlight</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Price</label>
+                            <input type="number" name="price" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Description</label>
+                        <textarea name="description" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
+                    </div>
+                    <div class="flex justify-end space-x-3">
+                        <button type="button" id="cancelBtn" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            Cancel
+                        </button>
+                        <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-[#ff0066] rounded-md shadow-sm hover:bg-[#e6005c] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#ff0066]">
+                            Save Tour
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <script>
+            // Modal functionality
+            const modal = document.getElementById('tourModal');
+            const createTourBtn = document.getElementById('createTourBtn');
+            const closeModal = document.getElementById('closeModal');
+            const cancelBtn = document.getElementById('cancelBtn');
+
+            createTourBtn.addEventListener('click', () => {
+                modal.classList.remove('hidden');
+            });
+
+            const closeModalFunction = () => {
+                modal.classList.add('hidden');
+            };
+
+            closeModal.addEventListener('click', closeModalFunction);
+            cancelBtn.addEventListener('click', closeModalFunction);
+
+            // Close modal when clicking outside
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModalFunction();
+                }
+            });
+
+            // Form submission
+            const tourForm = document.getElementById('tourForm');
+            tourForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                // Add your form submission logic here
+                closeModalFunction();
+            });
+        </script>
+                <p class="text-gray-600 dark:text-gray-400">Manage your tour packages</p>
+            </div>
+            
+            <button class="bg-[#ff0066] text-white px-4 py-2 rounded-lg hover:bg-[#ff0066]/90 transition-colors duration-200 flex items-center">
+                <i class="fas fa-plus mr-2"></i> Add New Tour
+            </button>
+        </div>
+
+        <!-- Tours Table -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden">
+            <div class="p-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+                <h3 class="text-lg font-semibold dark:text-white">All Tours</h3>
+                <div class="flex space-x-4">
+                    <input type="text" 
+                           placeholder="Search tours..." 
+                           class="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#ff0066] focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <select class="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#ff0066] focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                        <option value="all">All Categories</option>
+                        <option value="adventure">Adventure</option>
+                        <option value="cultural">Cultural</option>
+                        <option value="beach">Beach</option>
+                    </select>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50 dark:bg-gray-700">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Tour Name</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Duration</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Category</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Price</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Category</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                        <% tours.forEach(tour => { %>
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <img class="h-10 w-10 rounded-lg object-cover mr-3" src="<%= tour.image %>" alt="<%= tour.name %>">
+                                    <div class="text-sm font-medium text-gray-900 dark:text-white"><%= tour.name %></div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900 dark:text-white"><%= tour.duration %> Days</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-500 dark:text-gray-400"><%= tour.category %></div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900 dark:text-white">₹<%= tour.price %></div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full <%= tour.status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' %>">
+                                    <%= tour.status %>
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <button class="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 mr-3">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div>
+            <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex justify-between items-center">
+                    <div class="text-sm text-gray-500 dark:text-gray-400">
+                        Showing <span class="font-medium">1</span> to <span class="font-medium">10</span> of <span class="font-medium"><%= tours.length %></span> results
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="px-3 py-1 border rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            Previous
+                        </button>
+                        <button class="px-3 py-1 border rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            Next
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
