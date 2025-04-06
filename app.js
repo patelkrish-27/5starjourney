@@ -40,50 +40,38 @@ app.use((req, res, next) => {
   next();
 });
 
-// Home page - now using Firebase data
+// Home route
 app.get('/', async (req, res) => {
-    try {
-        const tours = await tourService.getActiveTours();
-        res.render('home', { 
-            title: '5starjourney',
-            tours: tours
-        });
-    } catch (error) {
-        console.error('Error fetching tours:', error);
-        res.render('home', { 
-            title: '5starjourney',
-            tours: []
-        });
-    }
+  try {
+    const tours = await tourService.getAllTours();
+    res.render('home', { 
+      tours: tours,
+      stats: {
+        totalTours: tours.length,
+        internationalTours: tours.filter(tour => tour.category === 'International').length,
+        domesticTours: tours.filter(tour => tour.category === 'Domestic').length
+      }
+    });
+  } catch (error) {
+    console.error('Error fetching tours:', error);
+    res.render('home', { tours: [], stats: { totalTours: 0, internationalTours: 0, domesticTours: 0 } });
+  }
 });
 
-// Tour detail page route - now using Firebase data
-app.get('/tours/:tourSlug', async (req, res) => {
-    try {
-        const tour = await tourService.getTourBySlug(req.params.tourSlug);
-        if (!tour) {
-            return res.status(404).render('error', { 
-                title: 'Not Found | 5starjourney',
-                message: 'Tour not found' 
-            });
-        }
-
-        const tourData = {
-            ...tour,
-            title: `${tour.name} | 5starjourney`,
-            tourName: tour.name,
-            tourType: tour.type,
-            tourDescription: tour.description
-        };
-        
-        res.render('tourpage', tourData);
-    } catch (error) {
-        console.error('Error fetching tour:', error);
-        res.status(500).render('error', { 
-            title: 'Error | 5starjourney',
-            message: 'Failed to load tour details' 
-        });
+// Tour detail page route
+app.get('/tours/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const tour = await tourService.getTourById(id);
+    
+    if (!tour) {
+      return res.status(404).render('error', { message: 'Tour not found' });
     }
+    res.render('tourpage', { tour });
+  } catch (error) {
+    console.error('Error fetching tour details:', error);
+    res.status(500).render('error', { message: 'Failed to load tour details' });
+  }
 });
 
 // Admin routes

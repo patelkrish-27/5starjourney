@@ -109,7 +109,7 @@
                             <a href="/#Domestic" class="text-white hover:text-[#ff0066] transition-colors duration-300 text-sm">DOMESTIC</a>
                             <a href="/#International" class="text-white hover:text-[#ff0066] transition-colors duration-300 text-sm">INTERNATIONAL</a>
                             <a href="#Footer" class="text-white hover:text-[#ff0066] transition-colors duration-300 text-sm">CONTACT</a>
-                            <button class="bg-[#ff0066] text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-[#ff0066]/90 transition-all duration-300">Book Now</button>
+                            <a href="/admin/login" class="bg-[#ff0066] text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-[#ff0066]/90 transition-all duration-300">Admin</a>
                         </div>
                         <button id="mobile-menu-button" class="md:hidden text-white hover:text-[#ff0066] transition-colors duration-300">
                             <i class="fas fa-bars text-2xl"></i>
@@ -145,20 +145,24 @@
         <div class="relative z-20 max-w-8xl mx-auto px-6 pt-32 hero-text">
             <h1 class="text-6xl font-bold text-white mb-6">Your Journey, <br/>Our Passion</h1>
             <p class="text-xl text-white/90 mb-8 max-w-2xl">Explore the world with 5starjourney—where every trip is tailored, every destination unforgettable, and every moment filled with wonder.</p>
-            <button class="!rounded-button bg-custom text-white px-8 py-3 text-lg">Explore Now</button>            
+            <a href="https://wa.me/918238773780" class="!rounded-button bg-custom text-white px-8 py-3 text-lg">Book Now</a>            
         </div>
     </header>
     <main class="max-w-8xl mx-auto px-6 py-16">
-        <!-- 1. Bali image carousel and description -->
+        <!-- Tour image carousel and description -->
         <div class="max-w-8xl mx-auto px-6 py-16">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="md:col-span-2">
                     <div class="relative w-full h-96 mb-8">
                         <div class="carousel relative overflow-hidden rounded-xl">
                             <div class="flex transition-transform duration-500">
-                                <img src="/assets/images/tours/bali-rice-terraces.jpg" class="w-full h-96 object-cover flex-shrink-0" alt="Bali View 1" />
-                                <img src="/assets/images/tours/bali-temple.jpg" class="w-full h-96 object-cover flex-shrink-0" alt="Bali View 2" />
-                                <img src="/assets/images/tours/bali-beach-sunset.jpg" class="w-full h-96 object-cover flex-shrink-0" alt="Bali View 3" />
+                                <% if (tour.images && tour.images.length > 0) { %>
+                                    <% tour.images.forEach((image, index) => { %>
+                                        <img src="<%= image %>" class="w-full h-96 object-cover flex-shrink-0" alt="<%= tour.title %> View <%= index + 1 %>" />
+                                    <% }); %>
+                                <% } else { %>
+                                    <img src="/assets/images/tours/default-tour.jpg" class="w-full h-96 object-cover flex-shrink-0" alt="Default Tour Image" />
+                                <% } %>
                             </div>
                             <button class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg">
                                 <i class="fas fa-chevron-left"></i>
@@ -167,40 +171,48 @@
                                 <i class="fas fa-chevron-right"></i>
                             </button>
                             <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
-                                <button class="w-2 h-2 rounded-full bg-white/60 hover:bg-white"></button>
-                                <button class="w-2 h-2 rounded-full bg-white/60 hover:bg-white"></button>
-                                <button class="w-2 h-2 rounded-full bg-white/60 hover:bg-white"></button>
+                                <% if (tour.images && tour.images.length > 0) { %>
+                                    <% tour.images.forEach((_, index) => { %>
+                                        <button class="w-2 h-2 rounded-full bg-white/60 hover:bg-white <%= index === 0 ? 'bg-white' : '' %>"></button>
+                                    <% }); %>
+                                <% } else { %>
+                                    <button class="w-2 h-2 rounded-full bg-white"></button>
+                                <% } %>
                             </div>
                         </div>
                     </div>
-                    <h1 class="text-4xl font-bold mb-4 dark:text-white"><%= tourName %></h1>
+                    <h1 class="text-4xl font-bold mb-4 dark:text-white"><%= tour.title %></h1>
                     <div class="flex items-center space-x-4 mb-6">
-                        <span class="bg-custom/10 text-custom px-3 py-1 rounded-full"><%= duration %> Days</span>
-                        <span class="bg-custom/10 text-custom px-3 py-1 rounded-full"><%= tourType %></span>
-                        <span class="bg-custom/10 text-custom px-3 py-1 rounded-full"><%= difficulty %></span>
+                        <span class="bg-custom/10 text-custom px-3 py-1 rounded-full"><%= tour.duration %></span>
+                        <span class="bg-custom/10 text-custom px-3 py-1 rounded-full"><%= tour.category %></span>
+                        <span class="bg-custom/10 text-custom px-3 py-1 rounded-full"><%= tour.difficulty %></span>
                     </div>
                     <div class="prose dark:prose-invert max-w-none mb-8">
                         <h2 class="text-2xl font-semibold mb-4">Tour Overview</h2>
-                        <p class="text-gray-600 dark:text-gray-400"><%= tourDescription %></p>
+                        <p class="text-gray-600 dark:text-gray-400"><%= tour.description %></p>
                         
                         <!-- 2. Highlights -->
-                        <h2 class="text-2xl font-semibold mb-4 mt-8">Highlights</h2>
-                        <ul class="list-disc pl-6 text-gray-600 dark:text-gray-400">
-                            <% highlights.forEach(highlight => { %>
-                                <li><%= highlight %></li>
-                            <% }); %>
-                        </ul>
+                        <% if (tour.highlights && tour.highlights.length > 0) { %>
+                            <h2 class="text-2xl font-semibold mb-4 mt-8">Highlights</h2>
+                            <ul class="list-disc pl-6 text-gray-600 dark:text-gray-400">
+                                <% tour.highlights.forEach(highlight => { %>
+                                    <li><%= highlight %></li>
+                                <% }); %>
+                            </ul>
+                        <% } %>
                         
                         <!-- 3. Itinerary -->
-                        <h2 class="text-2xl font-semibold mb-4 mt-8">Itinerary</h2>
-                        <div class="space-y-4">
-                            <% itinerary.forEach(day => { %>
-                                <div class="border-l-4 border-custom pl-4">
-                                    <h3 class="font-semibold"><%= day.title %></h3>
-                                    <p class="text-gray-600 dark:text-gray-400"><%= day.description %></p>
-                                </div>
-                            <% }); %>
-                        </div>
+                        <% if (tour.itinerary) { %>
+                            <h2 class="text-2xl font-semibold mb-4 mt-8">Itinerary</h2>
+                            <div class="space-y-4">
+                                <% Object.keys(tour.itinerary).forEach(day => { %>
+                                    <div class="border-l-4 border-custom pl-4">
+                                        <h3 class="font-semibold"><%= tour.itinerary[day].title || `Day ${day}` %></h3>
+                                        <p class="text-gray-600 dark:text-gray-400"><%= tour.itinerary[day].description %></p>
+                                    </div>
+                                <% }); %>
+                            </div>
+                        <% } %>
                     </div>
                 </div>
                 <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg h-fit sticky top-8">
@@ -208,20 +220,26 @@
                     <div class="space-y-4 mb-6">
                         <div class="flex justify-between">
                             <span class="text-gray-600 dark:text-gray-400">Duration:</span>
-                            <span class="font-semibold dark:text-white"><%= duration %> Days</span>
+                            <span class="font-semibold dark:text-white"><%= tour.duration %></span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-gray-600 dark:text-gray-400">Group Size:</span>
-                            <span class="font-semibold dark:text-white"><%= groupSize %> max</span>
+                            <span class="font-semibold dark:text-white"><%= tour.groupSize || 'Not specified' %> max</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-gray-600 dark:text-gray-400">Difficulty:</span>
-                            <span class="font-semibold dark:text-white"><%= difficulty %></span>
+                            <span class="font-semibold dark:text-white"><%= tour.difficulty %></span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-gray-600 dark:text-gray-400">Starting Point:</span>
-                            <span class="font-semibold dark:text-white"><%= startingPoint %></span>
+                            <span class="font-semibold dark:text-white"><%= tour.startingPoint || 'Not specified' %></span>
                         </div>
+                        <% if (tour.price) { %>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600 dark:text-gray-400">Price:</span>
+                            <span class="font-semibold dark:text-white">₹<%= tour.price.toLocaleString() %></span>
+                        </div>
+                        <% } %>
                     </div>
                     <button class="!rounded-button bg-custom text-white px-6 py-3 w-full mb-4">Book Now</button>
                     <button class="!rounded-button border-2 border-custom text-custom bg-transparent px-6 py-3 w-full">Download Brochure</button>
@@ -230,14 +248,15 @@
         </div>
         
         <!-- 4. Popular Attractions -->
+        <% if (tour.attractions && tour.attractions.length > 0) { %>
         <section class="py-16">
             <div class="max-w-8xl mx-auto px-6">
                 <h2 class="text-4xl font-bold text-center mb-12 dark:text-white">Popular Attractions</h2>
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                    <% attractions.forEach(attraction => { %>
+                    <% tour.attractions.forEach(attraction => { %>
                         <div class="group rounded-xl overflow-hidden shadow-lg">
                             <div class="relative h-64 overflow-hidden">
-                                <img src="/assets/images/attractions/<%= attraction.image %>" 
+                                <img src="<%= attraction.imageUrl %>" 
                                      class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
                                      alt="<%= attraction.name %>" />
                             </div>
@@ -251,13 +270,15 @@
                 </div>
             </div>
         </section>
+        <% } %>
         
         <!-- 5. Frequently Asked Questions -->
+        <% if (tour.faqs && tour.faqs.length > 0) { %>
         <section class="py-16 bg-gray-50 dark:bg-gray-800 rounded-2xl">
             <div class="max-w-8xl mx-auto px-6">
                 <h2 class="text-4xl font-bold text-center mb-12 dark:text-white">Frequently Asked Questions</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <% faqs.forEach(faq => { %>
+                    <% tour.faqs.forEach(faq => { %>
                         <div class="faq-item bg-white dark:bg-gray-700 rounded-xl p-6 cursor-pointer transition-all hover:shadow-lg">
                             <div class="flex justify-between items-center">
                                 <h3 class="text-lg font-semibold dark:text-white"><%= faq.question %></h3>
@@ -269,22 +290,7 @@
                 </div>
             </div>
         </section>
-        
-        <!-- Other Popular Tours section -->
-         <section id="Popular" class="my-20">
-            <h2 class="text-3xl font-bold mb-8 dark:text-white">Other Popular Tours</h2>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div class="rounded-lg overflow-hidden shadow-lg dark:bg-gray-800">
-                    <img src="https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80" class="w-full h-48 object-cover" alt="Ladakh Tour"/>
-                    <div class="p-4">
-                        <h3 class="font-semibold text-lg mb-2 dark:text-white">Ladakh Adventure</h3>
-                        <p class="text-gray-600 dark:text-gray-400 mb-4">8 Days | Cultural</p>
-                        <button class="!rounded-button bg-custom text-white px-4 py-2 w-full">View Details</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+        <% } %>
     
     <footer id="Footer" class="bg-gray-900 text-white py-16">
         <div class="max-w-8xl mx-auto px-6">

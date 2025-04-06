@@ -105,7 +105,7 @@
                             <a href="#Domestic" class="text-white hover:text-[#ff0066] transition-colors duration-300 text-sm">DOMESTIC</a>
                             <a href="#International" class="text-white hover:text-[#ff0066] transition-colors duration-300 text-sm">INTERNATIONAL</a>
                             <a href="#Footer" class="text-white hover:text-[#ff0066] transition-colors duration-300 text-sm">CONTACT</a>
-                            <button class="bg-[#ff0066] text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-[#ff0066]/90 transition-all duration-300">Book Now</button>
+                            <a href="/admin/login" class="bg-[#ff0066] text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-[#ff0066]/90 transition-all duration-300">Admin</a>
                         </div>
                         <button id="mobile-menu-button" class="md:hidden text-white hover:text-[#ff0066] transition-colors duration-300">
                             <i class="fas fa-bars text-2xl"></i>
@@ -141,7 +141,7 @@
         <div class="relative z-20 max-w-8xl mx-auto px-6 pt-32 hero-text">
             <h1 class="text-6xl font-bold text-white mb-6">Your Journey, <br/>Our Passion</h1>
             <p class="text-xl text-white/90 mb-8 max-w-2xl">Explore the world with 5starjourney—where every trip is tailored, every destination unforgettable, and every moment filled with wonder.</p>
-            <button class="!rounded-button bg-custom text-white px-8 py-3 text-lg">Explore Now</button>            
+            <a href="https://wa.me/918238773780" class="!rounded-button bg-custom text-white px-8 py-3 text-lg">Book Now</a>            
         </div>
     </header>
     <main class="max-w-8xl mx-auto px-6 py-16 bg-gray">
@@ -249,58 +249,54 @@
                     </p>
                 </div>
             </section>
+        <!-- Highlighted Events -->
         <section class="mb-20">
             <h2 class="text-3xl font-bold mb-8 dark:text-white">Highlighted Events</h2>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div class="rounded-lg overflow-hidden shadow-lg dark:bg-gray-800">
-                    <img src="https://images.unsplash.com/photo-1464278533981-50106e6176b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80" class="w-full h-48 object-cover" alt="Kuari Sampath"/>
-                    <div class="p-4">
-                        <h3 class="font-semibold text-lg mb-2 dark:text-white">Kuari Sampath Trek</h3>
-                        <p class="text-gray-600 dark:text-gray-400 mb-4">6 Days | Moderate</p>
-                        <button class="!rounded-button bg-custom text-white px-4 py-2 w-full">View Details</button>
+                <% tours.filter(tour => tour.category === 'Highlight').forEach(tour => { %>
+                    <div class="rounded-lg overflow-hidden shadow-lg dark:bg-gray-800">
+                        <img src="<%= tour.images[0] %>" class="w-full h-48 object-cover" alt="<%= tour.title %>"/>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-lg mb-2 dark:text-white"><%= tour.title %></h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4"><%= tour.duration %> | <%= tour.difficulty %></p>
+                            <a href="/tours/<%= tour.id %>" class="!rounded-button bg-custom text-white px-4 py-2 w-full inline-block text-center">View Details</a>
+                        </div>
                     </div>
-                </div>
+                <% }); %>
             </div>
         </section>
 
-      
-        <!-- International Tours section with one card -->
-        <section id = "International" class="mb-20">
+        <!-- International Tours section -->
+        <section id="International" class="mb-20">
             <h2 class="text-3xl font-bold mb-8 dark:text-white">International Tours</h2>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div class="rounded-lg overflow-hidden shadow-lg dark:bg-gray-800">
-                    <img src="https://www.worldatlas.com/upload/88/3b/8e/pura-ulun-danu-bratan-temple-bali-indonesia-guitar-photographer.jpg" class="w-full h-48 object-cover" alt="Bali Tour"/>
-                    <div class="p-4">
-                        <h3 class="font-semibold text-lg mb-2 dark:text-white">Bali Paradise</h3>
-                        <p class="text-gray-600 dark:text-gray-400 mb-4">7 Days | Adventure</p>
-                        <a href="/tours/bali-paradise" class="!rounded-button bg-custom text-white px-4 py-2 w-full inline-block text-center">View Details</a>
+                <% tours.filter(tour => tour.category === 'International').forEach(tour => { %>
+                    <div class="rounded-lg overflow-hidden shadow-lg dark:bg-gray-800">
+                        <img src="<%= tour.images[0] %>" class="w-full h-48 object-cover" alt="<%= tour.title %>"/>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-lg mb-2 dark:text-white"><%= tour.title %></h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4"><%= tour.duration %> | <%= tour.difficulty %></p>
+                            <a href="/tours/<%= tour.id %>" class="!rounded-button bg-custom text-white px-4 py-2 w-full inline-block text-center">View Details</a>
+                        </div>
                     </div>
-                </div>
+                <% }); %>
             </div>
         </section>
 
-        <!-- Domestic Tours section with one card -->
+        <!-- Domestic Tours section -->
         <section id="Domestic" class="mb-20">
             <h2 class="text-3xl font-bold mb-8 dark:text-white">Domestic Tours</h2>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div class="rounded-lg overflow-hidden shadow-lg dark:bg-gray-800">
-                    <img src="https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80" class="w-full h-48 object-cover" alt="Ladakh Tour"/>
-                    <div class="p-4">
-                        <h3 class="font-semibold text-lg mb-2 dark:text-white">Ladakh Adventure</h3>
-                        <p class="text-gray-600 dark:text-gray-400 mb-4">8 Days | Cultural</p>
-                        <button class="!rounded-button bg-custom text-white px-4 py-2 w-full">View Details</button>
+                <% tours.filter(tour => tour.category === 'Domestic').forEach(tour => { %>
+                    <div class="rounded-lg overflow-hidden shadow-lg dark:bg-gray-800">
+                        <img src="<%= tour.images[0] %>" class="w-full h-48 object-cover" alt="<%= tour.title %>"/>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-lg mb-2 dark:text-white"><%= tour.title %></h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4"><%= tour.duration %> | <%= tour.difficulty %></p>
+                            <a href="/tours/<%= tour.id %>" class="!rounded-button bg-custom text-white px-4 py-2 w-full inline-block text-center">View Details</a>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Stories section with one card -->
-        <section id="Stories" class="mb-20">
-            <h2 class="text-3xl font-bold mb-8 dark:text-white">Stories</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="rounded-lg overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1519904981063-b0cf448d479e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80" class="w-full h-64 object-cover" alt="Summit Success"/>
-                </div>
+                <% }); %>
             </div>
         </section>
 

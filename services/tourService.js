@@ -53,17 +53,15 @@ const tourService = {
 
   // Get a single tour by slug
   async getTourBySlug(slug) {
-    const snapshot = await get(toursRef);
-    if (!snapshot.exists()) return null;
-
-    let foundTour = null;
-    snapshot.forEach((childSnapshot) => {
-      const tour = childSnapshot.val();
-      if (tour.slug === slug) {
-        foundTour = { id: childSnapshot.key, ...tour };
-      }
+    const toursSnapshot = await get(query(toursRef, orderByChild('slug'), equalTo(slug)));
+    if (!toursSnapshot.exists()) return null;
+    
+    let tour = null;
+    toursSnapshot.forEach((childSnapshot) => {
+      tour = childSnapshot.val();
     });
-    return foundTour;
+    
+    return tour;
   },
 
   // Update a tour
