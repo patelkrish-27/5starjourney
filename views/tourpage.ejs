@@ -258,12 +258,12 @@
                 <h2 class="text-4xl font-bold text-center mb-12 dark:text-white">Frequently Asked Questions</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <% faqs.forEach(faq => { %>
-                        <div class="bg-white dark:bg-gray-700 rounded-xl p-6 cursor-pointer transition-all hover:shadow-lg">
+                        <div class="faq-item bg-white dark:bg-gray-700 rounded-xl p-6 cursor-pointer transition-all hover:shadow-lg">
                             <div class="flex justify-between items-center">
                                 <h3 class="text-lg font-semibold dark:text-white"><%= faq.question %></h3>
                                 <i class="fas fa-chevron-down text-custom transition-transform"></i>
                             </div>
-                            <div class="mt-4 text-gray-600 dark:text-gray-300 hidden"><%= faq.answer %></div>
+                            <div class="faq-answer mt-4 text-gray-600 dark:text-gray-300 hidden overflow-hidden transition-all duration-300" style="max-height: 0;"><%= faq.answer %></div>
                         </div>
                     <% }); %>
                 </div>
@@ -355,5 +355,36 @@
         </div>
     </a>
     <script src="/js/carousel.js"></script>
+    
+    <!-- FAQ Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const answer = this.querySelector('.faq-answer');
+                    const icon = this.querySelector('.fa-chevron-down');
+                    
+                    // Toggle the answer visibility
+                    if (answer.classList.contains('hidden')) {
+                        // Show the answer
+                        answer.classList.remove('hidden');
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
+                        icon.style.transform = 'rotate(180deg)';
+                    } else {
+                        // Hide the answer
+                        answer.style.maxHeight = '0';
+                        icon.style.transform = 'rotate(0deg)';
+                        
+                        // Add a delay before hiding to allow the animation to complete
+                        setTimeout(() => {
+                            answer.classList.add('hidden');
+                        }, 300);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
