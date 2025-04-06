@@ -1,7 +1,10 @@
 import express from 'express';
 import tourService from '../services/tourService.js';
+import cookieParser from 'cookie-parser';
+import jwt from 'jsonwebtoken';
 
 const router = express.Router();
+router.use(cookieParser());
 
 // Mock admin credentials - In production, use a proper database and authentication system
 const ADMIN_CREDENTIALS = {
@@ -9,11 +12,23 @@ const ADMIN_CREDENTIALS = {
     password: 'Krish321'
 };
 
-// Middleware to check if user is authenticated
+// JWT secret key - in production, use environment variable
+const JWT_SECRET = 'your-jwt-secret-key';
+
+// Middleware to check if user is authenticated using cookies and JWT
 const isAuthenticated = (req, res, next) => {
-    if (req.session && req.session.isAdmin) {
+    const token = req.cookies.adminToken;
+    
+    if (!token) {
+        return res.redirect('/admin/login');
+    }
+    
+    try {
+        const decoded = jwt.verify(token, JWT_SECRET);
+        req.admin = decoded;
         next();
-    } else {
+    } catch (error) {
+        console.error('Authentication error:', error);
         res.redirect('/admin/login');
     }
 };
@@ -29,22 +44,22 @@ router.post('/login', (req, res) => {
     
     // Check credentials
     if (email === ADMIN_CREDENTIALS.email && password === ADMIN_CREDENTIALS.password) {
-        // Set session variables
-        req.session.isAdmin = true;
+        // Create JWT token
+        const token = jwt.sign(
+            { email: ADMIN_CREDENTIALS.email, isAdmin: true },
+            JWT_SECRET,
+            { expiresIn: '24h' }
+        );
         
-        // Force session save before redirecting
-        req.session.save((err) => {
-            if (err) {
-                console.error('Session save error:', err);
-                return res.render('admin/login', { 
-                    title: 'Admin Login | 5starjourney',
-                    error: 'Session error. Please try again.' 
-                });
-            }
-            
-            // Redirect to dashboard after successful save
-            res.redirect('/admin/dashboard');
+        // Set cookie
+        res.cookie('adminToken', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            maxAge: 24 * 60 * 60 * 1000 // 24 hours
         });
+        
+        // Redirect to dashboard
+        res.redirect('/admin/dashboard');
     } else {
         res.render('admin/login', { 
             title: 'Admin Login | 5starjourney',
@@ -55,7 +70,7 @@ router.post('/login', (req, res) => {
 
 // Admin logout
 router.post('/logout', (req, res) => {
-    req.session.destroy();
+    res.clearCookie('adminToken');
     res.redirect('/admin/login');
 });
 

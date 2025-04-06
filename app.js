@@ -15,7 +15,7 @@ const port = process.env.PORT || 3000;
 
 // Update session configuration for better Vercel compatibility
 app.use(session({
-  secret: 'your-secret-key', // Replace with a strong secret
+  secret: 'weber', // Replace with a strong secret
   resave: false,
   saveUninitialized: false,
   cookie: {
