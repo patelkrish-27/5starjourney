@@ -22,6 +22,15 @@ gsap.to(".events-heading", {
     duration: 0.5
 })
 
+gsap.to(".hero-content",{
+  delay:0.5,
+  x:0,
+  opacity:1,
+  ease:"power2.out",
+  duration:1,
+  stagger:0.3,
+})
+
 
 ScrollTrigger.matchMedia({
     "(min-width: 768px)": function () {
