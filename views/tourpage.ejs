@@ -141,14 +141,13 @@
             </button>
             <div class="mobile-menu-content">
                 <a href="#" class="text-white hover:text-[#ff0066] transition-colors duration-300">HOME</a>
-                <a href="#Services" class="text-white hover:text-[#ff0066] transition-colors duration-300">SERVICES</a>
-                <a href="#Domestic" class="text-white hover:text-[#ff0066] transition-colors duration-300">DOMESTIC</a>
-                <a href="#International"
+                <a href="/#Services" class="text-white hover:text-[#ff0066] transition-colors duration-300">SERVICES</a>
+                <a href="/#Domestic" class="text-white hover:text-[#ff0066] transition-colors duration-300">DOMESTIC</a>
+                <a href="/#International"
                     class="text-white hover:text-[#ff0066] transition-colors duration-300">INTERNATIONAL</a>
                 <a href="#Footer" class="text-white hover:text-[#ff0066] transition-colors duration-300">CONTACT</a>
-                <a href="https://wa.me/918238773780"
-                    class="bg-[#ff0066] text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-[#ff0066]/90 transition-all duration-300 mt-6">Book
-                    Now</a>
+                <a href="/admin/login"
+                    class="bg-[#ff0066] text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-[#ff0066]/90  text-center duration-300">Admin</a>
             </div>
         </div>
 
@@ -471,6 +470,38 @@
                         }, 300);
                     }
                 });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuClose = document.getElementById('mobile-menu-close');
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+            const mobileMenuLinks = document.querySelectorAll('#mobile-menu a');
+
+            // Function to open mobile menu
+            function openMobileMenu() {
+                mobileMenu.classList.add('active');
+                mobileMenuOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+            }
+
+            // Function to close mobile menu
+            function closeMobileMenu() {
+                mobileMenu.classList.remove('active');
+                mobileMenuOverlay.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+
+            // Event listeners
+            mobileMenuButton.addEventListener('click', openMobileMenu);
+            mobileMenuClose.addEventListener('click', closeMobileMenu);
+            mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+            // Close menu when clicking on links
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
             });
         });
     </script>

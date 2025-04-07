@@ -8,8 +8,8 @@ router.use(cookieParser());
 
 // Mock admin credentials - In production, use a proper database and authentication system
 const ADMIN_CREDENTIALS = {
-    email: 'krishpatel27x@gmail.com',
-    password: 'Krish321'
+    email: 'info.5starjourney@gmail.com',
+    password: '5*Journey'
 };
 
 // JWT secret key - in production, use environment variable
