@@ -8,10 +8,10 @@
         <%= title %> | 5starjourney
     </title>
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/public/assets/images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/public/assets/images/favicon-16x16.png">
-    <link rel="manifest" href="/public/assets/images/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+    <link rel="manifest" href="/assets/images/site.webmanifest">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
         rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
@@ -101,6 +101,9 @@
             }
         }
     </style>
+
+    <!-- Add GSAP before your closing head tag -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 
 <body class="font-sans dark:bg-gray-900">
@@ -162,10 +165,13 @@
         <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1440&h=600&q=80"
             class="absolute inset-0 w-full h-full object-cover" alt="Hero background" />
         <div class="relative z-20 max-w-8xl mx-auto px-6 pt-32 hero-text">
-            <h1 class="text-6xl font-bold text-white mb-6">Your Journey, <br />Our Passion</h1>
-            <p class="text-xl text-white/90 mb-8 max-w-2xl">Explore the world with 5starjourney—where every trip is
+            <h1 class="hero-content text-6xl font-bold text-white mb-6 opacity-0 -translate-x-10">Your Journey,
+                <br />Our Passion</h1>
+            <p class="hero-content text-xl text-white/90 mb-8 max-w-2xl opacity-0 -translate-x-10">Explore the world
+                with 5starjourney—where every trip is
                 tailored, every destination unforgettable, and every moment filled with wonder.</p>
-            <a href="https://wa.me/918238773780" class="!rounded-button bg-custom text-white px-8 py-3 text-lg">Book
+            <a href="https://wa.me/918238773780"
+                class="hero-content !rounded-button bg-custom text-white px-8 py-3 text-lg opacity-0 -translate-x-10">Book
                 Now</a>
         </div>
     </header>
@@ -233,11 +239,13 @@
 
 
         <!-- Services Section -->
-        <section id="Services" class="mb-20">
-            <h2 class="text-3xl font-bold mb-8 dark:text-white">Our Services</h2>
+        <section id="Services" class="services mb-20  ">
+            <h2 class="service-heading text-5xl font-bold mb-8 dark:text-white opacity-0 translate-y-10 text-center">Our
+                Services</h2>
+            <!-- <h2 class="services text-5xl font-bold mb-8 dark:text-white " >Our Services</h2> -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <!-- Passport Assistance -->
-                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg service-card opacity-0 translate-y-10">
                     <div class="text-[#ff0066] text-4xl mb-4">
                         <i class="fas fa-passport"></i>
                     </div>
@@ -249,7 +257,7 @@
                 </div>
 
                 <!-- Visa Assistance -->
-                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg service-card opacity-0 translate-y-10">
                     <div class="text-[#ff0066] text-4xl mb-4">
                         <i class="fas fa-id-card-alt"></i>
                     </div>
@@ -259,8 +267,9 @@
                     </p>
                 </div>
 
+
                 <!-- Air Ticket & Insurance -->
-                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg service-card opacity-0 translate-y-10">
                     <div class="text-[#ff0066] text-4xl mb-4">
                         <i class="fas fa-plane-departure"></i>
                     </div>
@@ -271,7 +280,7 @@
                 </div>
 
                 <!-- Tour Packages -->
-                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg service-card opacity-0 translate-y-10">
                     <div class="text-[#ff0066] text-4xl mb-4">
                         <i class="fas fa-globe-americas"></i>
                     </div>
@@ -494,6 +503,56 @@
             });
         });
     </script>
+
+    <!-- Add this script before closing body tag -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Existing mobile menu code
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuClose = document.getElementById('mobile-menu-close');
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+            const mobileMenuLinks = document.querySelectorAll('#mobile-menu a');
+
+            // Function to open mobile menu
+            function openMobileMenu() {
+                mobileMenu.classList.add('active');
+                mobileMenuOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+            }
+
+            // Function to close mobile menu
+            function closeMobileMenu() {
+                mobileMenu.classList.remove('active');
+                mobileMenuOverlay.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+
+            // Event listeners
+            mobileMenuButton.addEventListener('click', openMobileMenu);
+            mobileMenuClose.addEventListener('click', closeMobileMenu);
+            mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+            // Close menu when clicking on links
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+
+            // Add GSAP animation
+            const heroContent = document.querySelectorAll('.hero-content');
+
+            gsap.to(heroContent, {
+                opacity: 1,
+                x: 0,
+                duration: 1,
+                stagger: 0.2,
+                ease: "power2.out"
+            });
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="/js/animate.js"></script>
 </body>
 
 </html>
